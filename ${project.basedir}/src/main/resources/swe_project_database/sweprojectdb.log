@@ -1,0 +1,5 @@
+/*C3*/SET SCHEMA PUBLIC
+drop table if exists user cascade 
+drop sequence user_seq if exists
+create sequence user_seq start with 1 increment by 50
+create table user (id bigint not null, name varchar(255), primary key (id))
