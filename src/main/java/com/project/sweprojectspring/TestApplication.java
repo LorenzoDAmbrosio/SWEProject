@@ -16,7 +16,6 @@ public class TestApplication extends Application {
     public void init() throws Exception {
         ApplicationContext=new SpringApplicationBuilder(SweProjectSpringApplication.class).run();
     }
-
     @Override
     public void start(Stage stage) throws Exception {
         ApplicationContext.publishEvent(new StageReadyEvent(stage));

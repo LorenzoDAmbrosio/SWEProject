@@ -1,12 +1,12 @@
 package com.project.sweprojectspring;
 
-import ch.qos.logback.classic.html.UrlCssBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +18,6 @@ public class StageInitializer implements ApplicationListener<TestApplication.Sta
 
     @Value("classpath:/main/main-menu.fxml")
     private Resource mainMenuResource;
-    @Value("classpath:/main/authentication/login-page.fxml")
-    private Resource loginPageResource;
 
     public StageInitializer(@Value("VelvetView") String applicationTitle) {
         this.applicationTitle = applicationTitle;
@@ -30,8 +28,13 @@ public class StageInitializer implements ApplicationListener<TestApplication.Sta
     public void onApplicationEvent(TestApplication.StageReadyEvent event) {
         Stage stage=event.getStage();
 
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(DependencyInjectionConfig.class);
+        context.refresh();
         try {
             FXMLLoader loader = new FXMLLoader(mainMenuResource.getURL());
+
+            loader.setControllerFactory(context::getBean);
             Parent parent= loader.load();
             
             stage.setScene(new Scene(parent,800,600));
