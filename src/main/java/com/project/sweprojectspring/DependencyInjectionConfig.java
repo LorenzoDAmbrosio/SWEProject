@@ -18,6 +18,9 @@ public class DependencyInjectionConfig {
     public StageHandler stageHandler() {
         return new StageHandler();
     }
+
+    // Controllers Dependency Injection
+
     @Bean
     @Scope("prototype")
     //abilita la dependency injection sui controller javafx
