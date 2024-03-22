@@ -17,6 +17,9 @@ public class DependencyInjectionConfig {
     public StageHandler stageHandler() {
         return new StageHandler();
     }
+
+    // Controllers Dependency Injection
+
     @Bean
     @Scope("prototype")
     public MainMenuController mainMenuController () {
