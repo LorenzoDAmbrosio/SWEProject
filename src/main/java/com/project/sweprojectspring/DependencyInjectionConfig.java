@@ -2,6 +2,7 @@ package com.project.sweprojectspring;
 
 import com.project.sweprojectspring.controllers.MainMenuController;
 import com.project.sweprojectspring.controllers.authentication.LoginPageController;
+import com.project.sweprojectspring.controllers.authentication.LogoutPageController;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ public class DependencyInjectionConfig {
     }
     @Bean
     @Scope("prototype")
+    //abilita la dependency injection sui controller javafx
     public MainMenuController mainMenuController () {
         return new MainMenuController();
     }
@@ -27,4 +29,9 @@ public class DependencyInjectionConfig {
     public LoginPageController loginPageController () {
         return new LoginPageController();
     }
+
+    @Bean
+    @Scope("prototype")
+    public LogoutPageController logoutPageController () { return new LogoutPageController();}
+
 }
