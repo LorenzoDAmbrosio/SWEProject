@@ -1,10 +1,12 @@
-package com.project.sweprojectspring;
+package com.project.sweprojectspring.services;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class StageHandler {
     @Value("classpath:/main/main-menu.fxml")
     public Resource mainMenuResource;
 
+    @Autowired
+    private ApplicationContext context;
+
     public StageHandler(){
     }
 
@@ -34,9 +39,6 @@ public class StageHandler {
         FXMLLoader loader= null;
         try {
             loader = new FXMLLoader(resource.getURL());
-            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-            context.register(DependencyInjectionConfig.class);
-            context.refresh();
             loader.setControllerFactory(context::getBean);
             return loader.load();
         } catch (IOException e) {

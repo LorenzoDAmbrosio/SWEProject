@@ -1,16 +1,18 @@
 package com.project.sweprojectspring.base;
 
-import java.util.List;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-/*
-* Implements crud functionalities
-* */
-public interface DAO<T> {
 
-    void create(T t);
-    List<Result<T>> retrieveAll();
-    Result<T> retrieveOne();
-    void update(T t, String[] params);
+@Transactional(propagation = Propagation.REQUIRED)
+public abstract class DAO<T> implements DAOInterface<T> {
 
-    void delete(T t);
+    @PersistenceContext
+    protected EntityManager entityManager;
+
 }

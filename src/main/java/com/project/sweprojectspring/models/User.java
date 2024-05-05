@@ -1,20 +1,32 @@
 package com.project.sweprojectspring.models;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import com.project.sweprojectspring.base.DAO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-import java.util.Optional;
+import java.io.Serializable;
 
 @Entity
-public class User {
+@Table(name="User")
+@Data @AllArgsConstructor @NoArgsConstructor @ToString
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
 
-    // getters and setters omitted for brevity
+    @Column(unique = true)
+    private String username;
+
+    private String password;
+
+    public User(String username,String password){
+        this.username=username;
+        this.password=password;
+    }
+
+    public User(Long id) {
+        this.id=id;
+    }
 }

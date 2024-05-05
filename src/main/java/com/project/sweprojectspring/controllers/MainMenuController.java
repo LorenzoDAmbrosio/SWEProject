@@ -1,6 +1,6 @@
 package com.project.sweprojectspring.controllers;
 
-import com.project.sweprojectspring.StageHandler;
+import com.project.sweprojectspring.services.StageHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

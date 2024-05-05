@@ -2,14 +2,18 @@ package com.project.sweprojectspring;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
 
-public class TestApplication extends Application {
+@ImportResource("classpath:META-INF/persistence.xml")
+@EnableAutoConfiguration
+@ComponentScan
+public class SWEApplication extends Application {
     private ConfigurableApplicationContext ApplicationContext;
 
     @Override
