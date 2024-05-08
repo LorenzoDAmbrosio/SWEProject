@@ -1,4 +1,4 @@
-package com.project.sweprojectspring.models;
+package com.project.sweprojectspring.models.authentications;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="User")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class User implements Serializable {
 

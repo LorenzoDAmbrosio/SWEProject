@@ -2,7 +2,7 @@ package com.project.sweprojectspring.daos;
 
 import com.project.sweprojectspring.base.DAO;
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.models.User;
+import com.project.sweprojectspring.models.authentications.User;
 import jakarta.persistence.NoResultException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;

@@ -2,7 +2,7 @@ package com.project.sweprojectspring.services;
 
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.daos.UserDao;
-import com.project.sweprojectspring.models.User;
+import com.project.sweprojectspring.models.authentications.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

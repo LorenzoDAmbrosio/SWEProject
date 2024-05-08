@@ -1,7 +1,5 @@
 package com.project.sweprojectspring.base;
 
-import com.project.sweprojectspring.models.User;
-
 public class Result<T> {
     private final Exception error;
     private final T value;

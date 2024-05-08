@@ -6,7 +6,7 @@
         version="2.1">
     <persistence-unit name="swePersistenceUnit" transaction-type="RESOURCE_LOCAL" >
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.project.sweprojectspring.models.User</class>
+        <class>com.project.sweprojectspring.models.authentications.User</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="spring.datasource.driver-class-name" value="org.hsqldb.jdbc.JDBCDriver"/>

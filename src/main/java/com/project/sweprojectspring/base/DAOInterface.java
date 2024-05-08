@@ -1,6 +1,5 @@
 package com.project.sweprojectspring.base;
 
-import com.project.sweprojectspring.models.User;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
