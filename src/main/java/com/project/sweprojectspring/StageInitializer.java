@@ -24,6 +24,9 @@ public class StageInitializer implements ApplicationListener<SWEApplication.Stag
     @Value("classpath:/main/main-menu.fxml")
     private Resource mainMenuResource;
 
+    @Value("classpath:/main/authentication/login-page.fxml")
+    public Resource loginPageResource;
+
     public StageInitializer(@Value("VelvetView") String applicationTitle) {
         this.applicationTitle = applicationTitle;
     }
@@ -34,7 +37,7 @@ public class StageInitializer implements ApplicationListener<SWEApplication.Stag
         Stage stage=event.getStage();
 
         try {
-            FXMLLoader loader = new FXMLLoader(mainMenuResource.getURL());
+            FXMLLoader loader = new FXMLLoader(loginPageResource.getURL());
 
             loader.setControllerFactory(context::getBean);
             Parent parent= loader.load();
