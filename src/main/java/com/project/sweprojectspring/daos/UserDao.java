@@ -37,20 +37,19 @@ public class UserDao extends DAO<User>{
 
     @Override
     public Result<User> retrieveOne(User filter) {
-//        try {
-//            User result= entityManager.createQuery("SELECT u FROM User u WHERE " +
-//                            "(u.id = :id OR :id IS NULL) AND " +
-//                            "(u.username = :username OR :username IS NULL) AND " +
-//                            "(u.password = :password OR :password IS NULL)", User.class)
-//                    .setParameter("id", filter.getId())
-//                    .setParameter("username", filter.getUsername())
-//                    .setParameter("password", filter.getPassword())
-//                    .getSingleResult();
-//            return Result.success(result);
-//        } catch (NoResultException e) {
-//            return Result.fail(e);
-//        }
-        return  Result.fail("a");
+        try {
+            User result= entityManager.createQuery("SELECT u FROM User u WHERE " +
+                            "(u.id = :id OR :id IS NULL) AND " +
+                            "(u.username = :username OR :username IS NULL) AND " +
+                            "(u.password = :password OR :password IS NULL)", User.class)
+                    .setParameter("id", filter.getId())
+                    .setParameter("username", filter.getUsername())
+                    .setParameter("password", filter.getPassword())
+                    .getSingleResult();
+            return Result.success(result);
+        } catch (NoResultException e) {
+            return Result.fail(e);
+        }
     }
 
     @Override
@@ -80,16 +79,15 @@ public class UserDao extends DAO<User>{
     }
     @Override
     public Long count(User partialUser) {
-//        Long count = entityManager.createQuery("SELECT COUNT(u) FROM User u WHERE " +
-//                        "(u.id = :id OR :id IS NULL) AND " +
-//                        "(u.username = :username OR :username IS NULL) AND " +
-//                        "(u.password = :password OR :password IS NULL)", Long.class)
-//                .setParameter("id", partialUser.getId())
-//                .setParameter("username", partialUser.getUsername())
-//                .setParameter("password", partialUser.getPassword())
-//                .getSingleResult();
-//        return count;
-        return 0L;
+        Long count = entityManager.createQuery("SELECT COUNT(u) FROM User u WHERE " +
+                        "(u.id = :id OR :id IS NULL) AND " +
+                        "(u.username = :username OR :username IS NULL) AND " +
+                        "(u.password = :password OR :password IS NULL)", Long.class)
+                .setParameter("id", partialUser.getId())
+                .setParameter("username", partialUser.getUsername())
+                .setParameter("password", partialUser.getPassword())
+                .getSingleResult();
+        return count;
     }
 
     public void createUserTable() {

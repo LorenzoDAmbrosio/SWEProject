@@ -23,10 +23,6 @@ public class AuthHandler {
     }
 
     public Result<User> Login(String username,String password){
-
-        userDao.create(new User("admin","Password01"));
-        Result<List<User>> e=userDao.retrieveAll();
-
         User filter=new User();
 
         if(username == null || username.trim().isEmpty()){
@@ -36,22 +32,21 @@ public class AuthHandler {
             return Result.fail("è richiesta una password");
         }
 
-        //filter.setUsername(username);
+        filter.setUsername(username);
         if(!userDao.any(filter)){
             return Result.fail("Utente non trovato");
         }
-        //filter.setPassword(password);
+        filter.setPassword(password);
         if(!userDao.any(filter)){
             return Result.fail("La password non coincide");
         }
-//        Result<User> foundUserResult=userDao.retrieveOne(new User(username,password));
-//
-//        if(foundUserResult.isSuccessful()){
-//            loggedUser=foundUserResult.ToValue();
-//        }
-//
-//        return foundUserResult;
-        return  Result.fail("a");
+        Result<User> foundUserResult=userDao.retrieveOne(new User(username,password));
+
+        if(foundUserResult.isSuccessful()){
+            loggedUser=foundUserResult.ToValue();
+        }
+
+        return foundUserResult;
     }
     public Result<User> Logout(){
         loggedUser=null;

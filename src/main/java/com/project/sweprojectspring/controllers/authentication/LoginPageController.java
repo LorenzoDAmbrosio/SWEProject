@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -25,7 +26,7 @@ public class LoginPageController {
     @FXML
     private Button loginButton;
     @FXML
-    private Label resultlabel;
+    private Label loginOutputLabel;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -45,10 +46,12 @@ public class LoginPageController {
                 Result<User> loginresult=authHandler.Login(username,password);
 
                 if(loginresult.isFailed()){
-                    resultlabel.setText(loginresult.ToError().getLocalizedMessage());
+                    loginOutputLabel.textFillProperty().setValue(new Color(1,0,0,1));
+                    loginOutputLabel.setText(loginresult.ToError().getLocalizedMessage());
                     return;
                 }
-                resultlabel.setText("Hai effettuato l'accesso.");
+                loginOutputLabel.textFillProperty().setValue(new Color(0,1,0,1));
+                loginOutputLabel.setText("Hai effettuato l'accesso.");
             }
         });
     }
