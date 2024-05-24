@@ -48,6 +48,26 @@ public class AuthHandler {
 
         return foundUserResult;
     }
+    public Result<User> Register(String username, String password, String repassword){
+        User newUser= new User();
+
+        if (username == null || username.trim().isEmpty()){
+            return Result.fail("è richiesto un username");
+        }
+        if(password == null || password.trim().isEmpty()){
+            return Result.fail("è richiesta una password");
+        }
+        if(!password.equals(repassword)){
+            return Result.fail("le passord devono combaciare");
+        }
+
+        newUser.setUsername(username);
+        if (userDao.any(newUser)){
+            return Result.fail("esiste gia un utente con questo nome");
+        }
+        newUser.setPassword(password);
+        return userDao.create(newUser);
+    }
     public Result<User> Logout(){
         loggedUser=null;
         return Result.fail("Not implemented");

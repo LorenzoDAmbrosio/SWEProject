@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2A003C;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sweprojectspring.controllers.authentication.RegistrationPageController">
+   <children>
+      <Label layoutX="216.0" layoutY="32.0" text="Registrati" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <VBox layoutX="54.0" layoutY="83.0" prefHeight="304.0" prefWidth="245.0" style="-fx-spacing: 30; -fx-alignment: center;">
+         <children>
+            <TextField fx:id="usernameTextField" prefHeight="25.0" prefWidth="216.0" promptText="Inserisci Nome Utente" />
+            <PasswordField fx:id="passwordTextField" prefHeight="25.0" prefWidth="216.0" promptText="Inserisci Password" />
+            <PasswordField fx:id="repasswordTextField" prefHeight="25.0" prefWidth="216.0" promptText="Reinserisci Password" />
+            <Label fx:id="registrationOutputLable" prefHeight="54.0" prefWidth="220.0" textFill="WHITE" />
+            <Button fx:id="fattoButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-background-color: #2A003C; -fx-border-color: green;" text="Fatto!" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

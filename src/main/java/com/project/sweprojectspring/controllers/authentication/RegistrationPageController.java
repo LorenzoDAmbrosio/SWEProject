@@ -17,60 +17,55 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+
 @Controller
-public class LoginPageController {
+public class RegistrationPageController {
     @Autowired
     private StageHandler stageHandler;
     @Autowired
     private AuthHandler authHandler;
 
-    @FXML
-    private Button mainMenuButton;
-    @FXML
-    private Button loginButton;
-    @FXML
-    private Label loginOutputLabel;
+
     @FXML
     private TextField usernameTextField;
     @FXML
     private TextField passwordTextField;
     @FXML
-    private Button registratiButton;
-
+    private TextField repasswordTextField;
     @FXML
+    private Button fattoButton;
+    @FXML
+    private Label registrationOutputLable;
+
+@FXML
     private void initialize() {
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
+        fattoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String username = null;
                 String password = null;
+                String repassword =null;
 
                 username=usernameTextField.getText();
                 password=passwordTextField.getText();
+                repassword=repasswordTextField.getText();
 
-                Result<User> loginresult=authHandler.Login(username,password);
+                Result<User> createresult=authHandler.Register(username, password, repassword);
 
-                if(loginresult.isFailed()){
-                    loginOutputLabel.textFillProperty().setValue(new Color(1,0,0,1));
-                    loginOutputLabel.setText(loginresult.ToError().getLocalizedMessage());
+                if(createresult.isFailed()){
+                    registrationOutputLable.textFillProperty().setValue(new Color(1,0,0,1));
+                    registrationOutputLable.setText(createresult.ToError().getLocalizedMessage());
                     return;
                 }
-                loginOutputLabel.textFillProperty().setValue(new Color(0,1,0,1));
-                loginOutputLabel.setText("Hai effettuato l'accesso.");
+                registrationOutputLable.textFillProperty().setValue(new Color(0,1,0,1));
+                registrationOutputLable.setText("Ti sei registrato");
 
                 Scene scene = ((Node)event.getSource()).getScene();
                 Stage stage= (Stage) scene.getWindow();
                 stageHandler.SwitchStage(stage,stageHandler.mainMenuResource );
             }
         });
-        registratiButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
 
-                stageHandler.SwitchStage(stage,stageHandler.registestrationPageResource);
-            }
-        });
     }
+
 }

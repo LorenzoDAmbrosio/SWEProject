@@ -24,6 +24,9 @@ public class StageHandler {
     @Value("classpath:/main/main-menu.fxml")
     public Resource mainMenuResource;
 
+    @Value("classpath:/main/authentication/registration-page.fxml")
+    public Resource registestrationPageResource;
+
     @Autowired
     private ApplicationContext context;
 
