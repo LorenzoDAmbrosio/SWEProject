@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name="Review")
@@ -20,6 +21,7 @@ public class Review implements Serializable  {
     private Long id;
 
     private String description;
+    private Date publishDate;
 
     @ManyToOne
     @JoinColumn(name="film_id", nullable=false)
@@ -28,6 +30,7 @@ public class Review implements Serializable  {
     @ManyToOne
     @JoinColumn(name="reviewer_id", nullable=false)
     private Reviewer reviewer;
+
 
 
     public Review(long id, String description){

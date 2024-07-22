@@ -1,29 +1,26 @@
 package com.project.sweprojectspring;
 
+import com.project.sweprojectspring.components.FilmComponent;
+import com.project.sweprojectspring.components.container.FilmContainerComponent;
+import com.project.sweprojectspring.controllers.FilmDetailController;
 import com.project.sweprojectspring.controllers.MainMenuController;
 import com.project.sweprojectspring.controllers.authentication.LoginPageController;
 import com.project.sweprojectspring.controllers.authentication.LogoutPageController;
+import com.project.sweprojectspring.daos.FilmDao;
 import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.resources.ReviewDao;
+import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
-import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManagerFactory;
 import javafx.application.Application;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -32,21 +29,6 @@ public class SweProjectSpringApplication {
     public static void main(String[] args) {
         Application.launch(SWEApplication.class,args);
     }
-
-    //region EntityManager Initialization
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-////        LocalContainerEntityManagerFactoryBean em
-////                = new LocalContainerEntityManagerFactoryBean();
-////        em.setDataSource(dataSource);
-////        em.setPackagesToScan("com.project.sweprojectspring.models");
-//
-////        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-////        em.setJpaVendorAdapter(vendorAdapter);
-////        em.setJpaProperties(additionalProperties());
-//
-//        return em;
-//    }
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
@@ -58,6 +40,18 @@ public class SweProjectSpringApplication {
     @Bean
     public UserDao userDao() {
         return new UserDao();
+    }
+    @Bean
+    public FilmDao filmDao() {
+        return new FilmDao();
+    }
+    @Bean
+    public WishlistDao wishlistDao() {
+        return new WishlistDao();
+    }
+    @Bean
+    public ReviewDao reviewDao() {
+        return new ReviewDao();
     }
     //endregion
 
@@ -88,6 +82,21 @@ public class SweProjectSpringApplication {
     @Bean
     @Scope("prototype")
     public LogoutPageController logoutPageController () { return new LogoutPageController();}
+    @Bean
+    @Scope("prototype")
+    public FilmContainerComponent filmContainerComponent () {
+        return new FilmContainerComponent();
+    }
+    @Bean
+    @Scope("prototype")
+    public FilmComponent filmComponent () {
+        return new FilmComponent();
+    }
+    @Bean
+    @Scope("prototype")
+    public FilmDetailController filmDetailController () {
+        return new FilmDetailController();
+    }
     //endregion
 
 }

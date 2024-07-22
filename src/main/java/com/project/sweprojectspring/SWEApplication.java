@@ -10,14 +10,25 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
+import java.awt.*;
+
+import javafx.scene.paint.Color;
+
 @ImportResource("classpath:META-INF/persistence.xml")
 @EnableAutoConfiguration
 @ComponentScan
 public class SWEApplication extends Application {
     private ConfigurableApplicationContext ApplicationContext;
 
+    public static Color BackgroundColor;
+    public static Color PrimaryColor;
+
     @Override
     public void init() throws Exception {
+        BackgroundColor=Color.web("#FFA500");
+        PrimaryColor= Color.web("#ffffff");
+
+
         ApplicationContext=new SpringApplicationBuilder(SweProjectSpringApplication.class).run();
     }
     @Override

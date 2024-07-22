@@ -3,13 +3,14 @@ package com.project.sweprojectspring.services;
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.daos.UserDao;
 import com.project.sweprojectspring.models.authentications.User;
+import com.sun.jdi.VoidValue;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class AuthHandler {
+    @Getter
     private User loggedUser = null;
     @Autowired
     private UserDao userDao;
@@ -19,7 +20,7 @@ public class AuthHandler {
     }
 
     public boolean IsUserLogged(){
-        return loggedUser==null;
+        return loggedUser!=null;
     }
 
     public Result<User> Login(String username,String password){
@@ -48,9 +49,9 @@ public class AuthHandler {
 
         return foundUserResult;
     }
-    public Result<User> Logout(){
+    public boolean Logout(){
         loggedUser=null;
-        return Result.fail("Not implemented");
+        return true;
     }
 
 }

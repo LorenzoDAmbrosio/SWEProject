@@ -43,4 +43,7 @@ public class Result<T> {
     public static <Ts> Result<Ts> success(Ts value){
         return new Result<Ts>(value);
     }
+    public static boolean success(){
+        return true;
+    }
 }

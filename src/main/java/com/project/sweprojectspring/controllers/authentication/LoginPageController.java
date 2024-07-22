@@ -56,9 +56,7 @@ public class LoginPageController {
                 loginOutputLabel.textFillProperty().setValue(new Color(0,1,0,1));
                 loginOutputLabel.setText("Hai effettuato l'accesso.");
 
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
-                stageHandler.SwitchStage(stage,stageHandler.mainMenuResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource);
             }
         });
     }

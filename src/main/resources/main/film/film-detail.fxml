@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #160020;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sweprojectspring.controllers.FilmDetailController">
+   <children>
+      <ToolBar layoutX="1.0" prefHeight="45.0" prefWidth="800.0" style="-fx-background-color: #2A003C; -fx-spacing: 30;">
+        <items>
+            <Label fx:id="filmTitle" text="Film Name" textFill="WHITE">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="exitButton" layoutX="181.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Esci" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets left="20.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+        </items>
+         <padding>
+            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
+      </ToolBar>
+       <HBox layoutY="55.0" prefHeight="140" prefWidth="800.0">
+           <children>
+               <HBox layoutY="55.0" prefHeight="155.0" prefWidth="500.0">
+                   <children>
+                       <Label contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="151.0" prefWidth="247.0" text="Descrizione" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                       <Label fx:id="filmDescription" alignment="CENTER_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="146.0" prefWidth="161.0" text="Anno" textAlignment="RIGHT" textFill="WHITE" />
+                   </children>
+                   <HBox.margin>
+                      <Insets left="30.0" right="30.0" />
+                   </HBox.margin>
+               </HBox>
+                <VBox prefHeight="155.0" prefWidth="300.0">
+                   <children>
+                         <HBox prefHeight="77.0" prefWidth="300.0">
+                             <children>
+                                 <Label contentDisplay="CENTER" prefHeight="72.0" prefWidth="247.0" text="Autore" textFill="WHITE" />
+                                 <Label fx:id="filmYear" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="72.0" prefWidth="247.0" text="Anno" textAlignment="RIGHT" textFill="WHITE" />
+                             </children>
+                         </HBox>
+                         <HBox prefHeight="77.0" prefWidth="300.0">
+                             <children>
+                                 <Label contentDisplay="CENTER" prefHeight="72.0" prefWidth="247.0" text="Autore" textFill="WHITE" />
+                                 <Label fx:id="filmAuthor" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="72.0" prefWidth="247.0" text="Anno" textAlignment="RIGHT" textFill="WHITE" />
+                             </children>
+                         </HBox>
+                   </children>
+                </VBox>
+            <VBox alignment="CENTER" layoutX="540.0" layoutY="10.0" prefHeight="155.0" prefWidth="300.0" spacing="20.0">
+               <children>
+                  <Button fx:id="likeButton" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #2A003C;" text="  ♡  " textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="filmTitle1" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="187.0" text="100 likes" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+           </children>
+       </HBox>
+      <HBox layoutY="200.0" prefHeight="400.0" prefWidth="800.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="400.0">
+               <children>
+                  <ToolBar prefHeight="53.0" prefWidth="373.0" style="-fx-background-color: #2A003C; -fx-spacing: 30;">
+                       <items>
+                           <Label text="Liste" textFill="WHITE">
+                               <font>
+                                   <Font size="20.0" />
+                               </font>
+                           </Label>
+                           <Pane prefHeight="43.0" prefWidth="237.0" HBox.hgrow="ALWAYS" />
+                       </items>
+                       <padding>
+                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                       </padding>
+                   </ToolBar>
+                  <TableView fx:id="wishlistTableView" prefHeight="388.0" prefWidth="358.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="400.0">
+               <children>
+                   <ToolBar prefHeight="15.0" prefWidth="387.0" style="-fx-background-color: #2A003C; -fx-spacing: 30;">
+                       <items>
+                           <Label prefHeight="9.0" prefWidth="95.0" text="Recensioni" textFill="WHITE">
+                               <font>
+                                   <Font size="20.0" />
+                               </font>
+                           </Label>
+                           <Pane prefHeight="43.0" prefWidth="218.0" HBox.hgrow="ALWAYS" />
+                       </items>
+                       <padding>
+                           <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                       </padding>
+                   </ToolBar>
+                  <TableView fx:id="filmReviewsTable" prefHeight="388.0" prefWidth="321.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

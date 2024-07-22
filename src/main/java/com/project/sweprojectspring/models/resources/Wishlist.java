@@ -23,7 +23,7 @@ public class Wishlist implements Serializable  {
     private String name;
     private String description;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
     @JoinTable(
             name = "Wishlist_Film",
             joinColumns = { @JoinColumn(name = "wishlist_id") },
@@ -31,7 +31,7 @@ public class Wishlist implements Serializable  {
     )
     private Set<Film> films=new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="subscribedUser_id", nullable=false)
     private SubscribedUser subscribedUser;
 
@@ -41,5 +41,14 @@ public class Wishlist implements Serializable  {
     }
     public Wishlist(String name){
         this.name=name;
+    }
+
+    public Integer getNumberOfFilms() {
+        if(films.isEmpty()) return  0;
+        return films.size();
+    }
+    public Boolean containsFilm(Film film) {
+        if(films.isEmpty()) return  false;
+        return films.contains(film);
     }
 }

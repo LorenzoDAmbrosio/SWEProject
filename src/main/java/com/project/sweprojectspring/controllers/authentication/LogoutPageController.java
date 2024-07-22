@@ -25,10 +25,7 @@ public class LogoutPageController {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
-
-                stageHandler.SwitchStage(stage,stageHandler.loginPageResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.loginPageResource);
             }
         });
     }

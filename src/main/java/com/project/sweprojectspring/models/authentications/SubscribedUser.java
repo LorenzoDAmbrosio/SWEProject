@@ -12,6 +12,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class SubscribedUser extends User implements Serializable  {
     @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     private Subscription subscription;
 
-    @OneToMany(mappedBy="subscribedUser")
+    @OneToMany(mappedBy="subscribedUser",fetch = FetchType.EAGER)
     private Set<Wishlist> wishlists=new HashSet<>();
 
     @OneToMany(mappedBy="subscribedUser")
@@ -34,5 +35,19 @@ public class SubscribedUser extends User implements Serializable  {
 
     public SubscribedUser(String Username, String password){
         super(Username,password);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SubscribedUser that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(this.getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), subscription);
     }
 }

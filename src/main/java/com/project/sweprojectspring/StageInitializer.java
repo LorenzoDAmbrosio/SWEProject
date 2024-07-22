@@ -1,5 +1,6 @@
 package com.project.sweprojectspring;
 
+import com.project.sweprojectspring.components.FilmComponent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
