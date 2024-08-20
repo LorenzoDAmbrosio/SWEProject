@@ -29,5 +29,6 @@
              </Button>
          </children>
       </VBox>
+      <Button fx:id="registratiButton" layoutX="367.0" layoutY="416.0" mnemonicParsing="false" style="-fx-background-color: #2A003C;" text="Registrati" textFill="WHITE" />
    </children>
 </AnchorPane>

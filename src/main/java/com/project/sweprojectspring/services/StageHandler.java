@@ -35,6 +35,9 @@ public class StageHandler {
     @Value("classpath:/main/components/FilmComponent.fxml")
     public Resource filmResource;
 
+    @Value("classpath:/main/authentication/registration-page.fxml")
+    public Resource registestrationPageResource;
+
     @Autowired
     private ApplicationContext context;
 
