@@ -68,6 +68,53 @@ public class AuthHandler {
         newUser.setPassword(password);
         return userDao.create(newUser);
     }
+
+    public Result<User> Change(String username, String password, String newpassword){
+        User filter=new User();
+        User newuser=new User();
+
+        if(username == null || username.trim().isEmpty()){
+            return Result.fail("è richiesto un username");
+        }
+        if(password == null || password.trim().isEmpty()){
+            return Result.fail("è richiesta una password");
+        }
+        if(newpassword == null || newpassword.trim().isEmpty()){
+            return Result.fail("è richiesta una password");
+        }
+
+
+        if(password.equals(newpassword)){
+            return Result.fail("la nuova password è uguale a quella vecchia");
+        }
+
+        // NON CREDO CHE SERVANO
+//        filter.setUsername(username);
+//        if(!userDao.any(filter)){
+//            return Result.fail("Utente non trovato");
+//        }
+//
+//        filter.setPassword(password);
+//        if(!userDao.any(filter)){
+//            return Result.fail("La password non coincide");
+//        }
+//
+//        Result<User> foundUserResult=userDao.retrieveOne(new User(username,password));
+//        if(foundUserResult.isFailed()){
+//           return Result.fail("Combinazione sbagliata");
+//        }
+        //non proprio cosi ma vabbe
+        filter.setUsername(username);
+        filter.setPassword(password);
+
+        newuser.setUsername(username);
+        newuser.setPassword(newpassword);
+
+        userDao.delete(filter);
+        return userDao.create(newuser);
+
+
+    }
     public Result<User> Logout(){
         loggedUser=null;
         return Result.fail("Not implemented");

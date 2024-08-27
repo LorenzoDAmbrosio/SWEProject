@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2A003C;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sweprojectspring.controllers.ImpostazioniController">
+    <children>
+        <Label layoutX="79.0" layoutY="90.0" prefHeight="88.0" prefWidth="318.0" text="Cambia Password" textFill="WHITE">
+            <font>
+                <Font size="40.0" />
+            </font>
+        </Label>
+        <VBox layoutX="303.0" layoutY="200.0" prefHeight="200.0" prefWidth="195.0" style="-fx-spacing: 30; -fx-alignment: center;">
+            <children>
+                <TextField fx:id="usernameTextField" promptText="username" />
+                <PasswordField fx:id="passwordTextField" promptText="password" />
+                <PasswordField fx:id="newPasswordTextField" promptText="nuova password" />
+                <Label fx:id="changeOutputLabel" textFill="WHITE" />
+                <Label fx:id="CambiaPassLabel" textFill="WHITE" />
+            </children>
+        </VBox>
+        <Button fx:id="CambiaButton" alignment="TOP_CENTER" layoutX="342.0" layoutY="418.0" mnemonicParsing="false" style="-fx-background-color: #2A003C;" text="Cambia Password" textAlignment="CENTER" textFill="WHITE" />
+
+        <Button fx:id="MainButton" alignment="TOP_CENTER" layoutX="358.0" layoutY="443.0" mnemonicParsing="false" style="-fx-background-color: #2A003C;" text="Main menù" textAlignment="CENTER" textFill="WHITE" />
+
+    </children>
+</AnchorPane>

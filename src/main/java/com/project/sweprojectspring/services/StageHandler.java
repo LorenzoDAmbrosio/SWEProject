@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,14 @@ public class StageHandler {
 
     @Value("classpath:/main/authentication/registration-page.fxml")
     public Resource registestrationPageResource;
+
+    @Value("classpath:/main/profilo.fxml")
+    public Resource profiloPageResource;
+
+    @Value("classpath:/main/impostazioni.fxml")
+    public Resource impostazioniPageResource;
+
+
 
     @Autowired
     private ApplicationContext context;
