@@ -60,6 +60,8 @@ public class RegistrationPageController {
                 registrationOutputLable.textFillProperty().setValue(new Color(0,1,0,1));
                 registrationOutputLable.setText("Ti sei registrato");
 
+                authHandler.Login(username,password);
+
                 stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource );
             }
         });
