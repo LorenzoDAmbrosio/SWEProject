@@ -22,7 +22,7 @@ public class AuthHandler {
     }
 
     public boolean IsUserLogged(){
-        return loggedUser!=null;
+        return loggedUser==null;
     }
 
     public Result<User> Login(String username,String password){
@@ -51,6 +51,74 @@ public class AuthHandler {
 
         return foundUserResult;
     }
+    public Result<User> Register(String username, String password, String repassword){
+        User newUser= new User();
+
+        if (username == null || username.trim().isEmpty()){
+            return Result.fail("è richiesto un username");
+        }
+        if(password == null || password.trim().isEmpty()){
+            return Result.fail("è richiesta una password");
+        }
+        if(!password.equals(repassword)){
+            return Result.fail("le passord devono combaciare");
+        }
+
+        newUser.setUsername(username);
+        if (userDao.any(newUser)){
+            return Result.fail("esiste gia un utente con questo nome");
+        }
+        newUser.setPassword(password);
+        return userDao.create(newUser);
+    }
+
+    public Result<User> Change(String username, String password, String newpassword){
+        User filter=new User();
+        User newuser=new User();
+
+        if(username == null || username.trim().isEmpty()){
+            return Result.fail("è richiesto un username");
+        }
+        if(password == null || password.trim().isEmpty()){
+            return Result.fail("è richiesta una password");
+        }
+        if(newpassword == null || newpassword.trim().isEmpty()){
+            return Result.fail("è richiesta una password");
+        }
+
+
+        if(password.equals(newpassword)){
+            return Result.fail("la nuova password è uguale a quella vecchia");
+        }
+
+        // NON CREDO CHE SERVANO
+//        filter.setUsername(username);
+//        if(!userDao.any(filter)){
+//            return Result.fail("Utente non trovato");
+//        }
+//
+//        filter.setPassword(password);
+//        if(!userDao.any(filter)){
+//            return Result.fail("La password non coincide");
+//        }
+//
+//        Result<User> foundUserResult=userDao.retrieveOne(new User(username,password));
+//        if(foundUserResult.isFailed()){
+//           return Result.fail("Combinazione sbagliata");
+//        }
+        //non proprio cosi ma vabbe
+        filter.setUsername(username);
+        filter.setPassword(password);
+
+        newuser.setUsername(username);
+        newuser.setPassword(newpassword);
+
+        userDao.delete(filter);
+        return userDao.create(newuser);
+
+
+    }
+
     public boolean Logout(){
         loggedUser=null;
         return true;

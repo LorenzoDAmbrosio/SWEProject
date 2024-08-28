@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.project.sweprojectspring.components.container.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,8 +14,15 @@
                   <Font size="29.0" />
                </font>
             </Label>
-            <Separator prefHeight="43.0" prefWidth="373.0" visible="false" />
-          <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: #2A003C;" text="Account" textFill="WHITE">
+            <Separator prefHeight="43.0" prefWidth="291.0" visible="false" />
+            <Button fx:id="ProfiloButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #2A003C;" text="utente" textFill="WHITE">
+                <opaqueInsets>
+                    <Insets left="20.0" />
+                </opaqueInsets>
+                <font>
+                    <Font size="15.0" />
+                </font></Button>
+            <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #2A003C;" text="Noleggia" textFill="WHITE">
                <opaqueInsets>
                   <Insets left="20.0" />
                </opaqueInsets>

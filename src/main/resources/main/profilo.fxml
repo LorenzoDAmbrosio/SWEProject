@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #160020;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sweprojectspring.controllers.ProfiloController">
+    <ToolBar layoutX="1.0" prefHeight="31.0" prefWidth="800.0" style="-fx-background-color: #2A003C; -fx-spacing: 30;">
+        <items>
+            <Button fx:id="MainButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="186.0" style="-fx-background-color: #2A003C;" text="VelvetView" textFill="WHITE">
+                <font>
+                    <Font size="29.0" />
+                </font>
+            </Button>
+
+            <Separator prefHeight="63.0" prefWidth="197.0" visible="false" />
+
+            <Button fx:id="RewButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #2A003C;" text="Diventa Reviewer" textFill="WHITE">
+                <opaqueInsets>
+                    <Insets left="20.0" />
+                </opaqueInsets>
+                <font>
+                    <Font size="15.0" />
+                </font></Button>
+            <Button fx:id="ImpostazioniButton" layoutX="181.0" layoutY="16.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #2A003C;" text="Cambia password" textFill="WHITE">
+                <opaqueInsets>
+                    <Insets left="20.0" />
+                </opaqueInsets>
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </Button>
+        </items>
+        <padding>
+            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+        </padding>
+    </ToolBar>
+</AnchorPane>

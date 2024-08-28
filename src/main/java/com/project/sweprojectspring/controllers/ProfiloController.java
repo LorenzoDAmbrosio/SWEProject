@@ -1,7 +1,7 @@
 package com.project.sweprojectspring.controllers;
 
-import com.project.sweprojectspring.components.container.FilmContainerComponent;
-import com.project.sweprojectspring.daos.FilmDao;
+import com.project.sweprojectspring.base.Result;
+import com.project.sweprojectspring.models.authentications.User;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.event.ActionEvent;
@@ -11,50 +11,45 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-// permettono di interagire con le viste
 @Controller
-public class MainMenuController {
-    @Autowired
-    private AuthHandler authHandler;
+public class ProfiloController {
     @Autowired
     private StageHandler stageHandler;
     @Autowired
-    private FilmDao filmDao;
+    private AuthHandler authHandler;
+
 
     @FXML
-    private Button logOutButton;
+    private Button ImpostazioniButton;
     @FXML
-    private Label label;
+    private Button RewButton;
     @FXML
-    private Button ProfiloButton;
-
-    @FXML
-    private FilmContainerComponent filmContainer;
+    private Button MainButton;
 
     @FXML
     private void initialize() {
-        logOutButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-                boolean logoutResult=authHandler.Logout();
-
-                if(logoutResult){
-                    stageHandler.SwitchStageFromEvent(event,stageHandler.loginPageResource);
-                }
-            }
-        });
-        ProfiloButton.setOnAction(new EventHandler<ActionEvent>() {
+        ImpostazioniButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Scene scene = ((Node)event.getSource()).getScene();
                 Stage stage= (Stage) scene.getWindow();
 
-                stageHandler.SwitchStage(stage,stageHandler.profiloPageResource);
+                stageHandler.SwitchStage(stage,stageHandler.impostazioniPageResource);
+            }
+        });
+        MainButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Scene scene = ((Node)event.getSource()).getScene();
+                Stage stage= (Stage) scene.getWindow();
+
+                stageHandler.SwitchStage(stage,stageHandler.mainMenuResource);
             }
         });
     }

@@ -38,6 +38,14 @@ public class StageHandler {
     @Value("classpath:/main/authentication/registration-page.fxml")
     public Resource registestrationPageResource;
 
+    @Value("classpath:/main/profilo.fxml")
+    public Resource profiloPageResource;
+
+    @Value("classpath:/main/impostazioni.fxml")
+    public Resource impostazioniPageResource;
+
+
+
     @Autowired
     private ApplicationContext context;
 
