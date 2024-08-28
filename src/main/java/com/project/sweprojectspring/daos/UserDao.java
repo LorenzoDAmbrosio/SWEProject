@@ -8,7 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository("UserDao")
-public class UserDao extends DAO<User>{
+public class
+UserDao extends DAO<User>{
     @Override
     public Result<User> create(User user) {
         try {

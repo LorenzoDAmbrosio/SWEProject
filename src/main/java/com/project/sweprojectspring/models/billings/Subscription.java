@@ -13,18 +13,19 @@ import java.util.Date;
 @Table(name="Subscription")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
-public abstract class Subscription implements Serializable {
+public class Subscription implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     private Date subscriptionStart;
     private Time subscriptionDuration;
 
 
-    public abstract int getMaximumNumberOfWishlist();
+    public int getMaximumNumberOfWishlist(){
+        return  0;
+    }
 
     public Subscription(Date subscriptionStart, Time subscriptionDuration) {
         this.subscriptionStart = subscriptionStart;

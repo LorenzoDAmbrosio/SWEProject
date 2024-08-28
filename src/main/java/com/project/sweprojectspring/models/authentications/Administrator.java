@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="Administrator")
-@PrimaryKeyJoinColumn(name = "UserId")
+@PrimaryKeyJoinColumn(name = "User_Id")
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class Administrator extends User implements Serializable  {
 

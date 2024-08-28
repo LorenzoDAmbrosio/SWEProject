@@ -69,18 +69,15 @@ public class ImpostazioniController {
                 changeOutputLabel.textFillProperty().setValue(new Color(0,1,0,1));
                 changeOutputLabel.setText("Password cambiata.");
 
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
-                stageHandler.SwitchStage(stage,stageHandler.profiloPageResource );
+
+                stageHandler.SwitchStageFromEvent(event,stageHandler.profiloPageResource );
             }
         });
         MainButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
 
-                stageHandler.SwitchStage(stage,stageHandler.mainMenuResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource);
             }
         });
     }

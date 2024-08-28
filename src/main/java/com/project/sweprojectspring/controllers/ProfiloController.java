@@ -37,19 +37,14 @@ public class ProfiloController {
         ImpostazioniButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
 
-                stageHandler.SwitchStage(stage,stageHandler.impostazioniPageResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.impostazioniPageResource);
             }
         });
         MainButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
-
-                stageHandler.SwitchStage(stage,stageHandler.mainMenuResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource);
             }
         });
     }

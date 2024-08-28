@@ -11,7 +11,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @Entity
-@Table(name="AddToWishlistAction")
+@Table(name="Add_To_Wishlist_Action")
 @Data @NoArgsConstructor @ToString
 public class AddToWishlistAction extends CallToAction implements Serializable  {
     @Override

@@ -16,9 +16,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name="SubscribedUser")
+@Table(name="Subscribed_User")
 @Inheritance(strategy = InheritanceType.JOINED)
-@PrimaryKeyJoinColumn(name = "UserId")
+@PrimaryKeyJoinColumn(name = "User_Id")
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class SubscribedUser extends User implements Serializable  {
 

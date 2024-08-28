@@ -4,6 +4,7 @@ import com.project.sweprojectspring.components.FilmComponent;
 import com.project.sweprojectspring.components.container.FilmContainerComponent;
 import com.project.sweprojectspring.controllers.FilmDetailController;
 import com.project.sweprojectspring.controllers.MainMenuController;
+import com.project.sweprojectspring.controllers.WishlistFormController;
 import com.project.sweprojectspring.controllers.authentication.LoginPageController;
 import com.project.sweprojectspring.controllers.authentication.LogoutPageController;
 import com.project.sweprojectspring.daos.FilmDao;
@@ -96,6 +97,11 @@ public class SweProjectSpringApplication {
     @Scope("prototype")
     public FilmDetailController filmDetailController () {
         return new FilmDetailController();
+    }
+    @Bean
+    @Scope("prototype")
+    public WishlistFormController wishlistFormController () {
+        return new WishlistFormController();
     }
     //endregion
 

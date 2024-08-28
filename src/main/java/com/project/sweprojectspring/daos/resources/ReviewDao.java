@@ -2,7 +2,6 @@ package com.project.sweprojectspring.daos.resources;
 
 import com.project.sweprojectspring.base.DAO;
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Review;
 import jakarta.persistence.NoResultException;
 import org.springframework.dao.DataIntegrityViolationException;

@@ -51,11 +51,10 @@ public class MainMenuController {
         ProfiloButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Scene scene = ((Node)event.getSource()).getScene();
-                Stage stage= (Stage) scene.getWindow();
-
-                stageHandler.SwitchStage(stage,stageHandler.profiloPageResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.profiloPageResource);
             }
         });
+
+        stageHandler.LoadComponent(stageHandler.filmContainerResource,filmContainer);
     }
 }

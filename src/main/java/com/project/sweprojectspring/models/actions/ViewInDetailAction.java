@@ -11,7 +11,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @Entity
-@Table(name="ViewInDetailAction")
+@Table(name="View_In_Detail_Action")
 @Data @NoArgsConstructor @ToString
 public class ViewInDetailAction extends CallToAction implements Serializable  {
     @Override

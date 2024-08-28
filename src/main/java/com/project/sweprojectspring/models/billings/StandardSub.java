@@ -9,7 +9,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @Entity
-@Table(name="StandardSubscription")
+@Table(name="Standard_Subscription")
 @Data @NoArgsConstructor @ToString
 public class StandardSub extends Subscription implements Serializable  {
 

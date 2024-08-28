@@ -11,7 +11,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @Entity
-@Table(name="AddRatingAction")
+@Table(name="Add_Rating_Action")
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
 public class AddRatingAction extends CallToAction implements Serializable  {
 

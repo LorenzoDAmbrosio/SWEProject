@@ -2,7 +2,6 @@ package com.project.sweprojectspring.daos.resources;
 
 import com.project.sweprojectspring.base.DAO;
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Wishlist;
 import jakarta.persistence.NoResultException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -56,7 +55,30 @@ public class WishlistDao extends DAO<Wishlist> {
 
     @Override
     public Result<Wishlist> update(Wishlist wishlist) {
-        return Result.fail("Non implementato");
+        try {
+            // Trova la wishlist esistente
+            Wishlist filter=new Wishlist(wishlist.getId(), wishlist.getName());
+            Result<Wishlist> existingWishlistResult = retrieveOne(filter);
+            if (existingWishlistResult.isFailed()) {
+                return Result.fail("Wishlist not found");
+            }
+
+            Wishlist existingWishlist = existingWishlistResult.ToValue();
+
+            // Aggiorna i campi della wishlist esistente con i valori della nuova wishlist
+            existingWishlist.setName(wishlist.getName());
+            existingWishlist.setDescription(wishlist.getDescription());
+            existingWishlist.setFilms(wishlist.getFilms());
+
+            // Esegui il merge delle modifiche
+            entityManager.merge(existingWishlist);
+
+            return Result.success(existingWishlist);
+        } catch (DataIntegrityViolationException e) {
+            return Result.fail("Data integrity violation.");
+        } catch (Exception e) {
+            return Result.fail(e);
+        }
     }
 
     @Override

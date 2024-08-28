@@ -17,7 +17,7 @@ import java.io.IOException;
 
 @Component
 public class StageInitializer implements ApplicationListener<SWEApplication.StageReadyEvent> {
-    private String applicationTitle;
+    private final String applicationTitle;
 
     @Autowired
     private ApplicationContext context;

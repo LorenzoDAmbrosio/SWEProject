@@ -24,16 +24,11 @@ public class LoginPageController {
     @Autowired
     private AuthHandler authHandler;
 
-    @FXML
-    private Button mainMenuButton;
-    @FXML
-    private Button loginButton;
-    @FXML
-    private Label loginOutputLabel;
-    @FXML
-    private TextField usernameTextField;
-    @FXML
-    private TextField passwordTextField;
+    @FXML private Button loginButton;
+    @FXML private Button registratiButton;
+    @FXML private Label loginOutputLabel;
+    @FXML private TextField usernameTextField;
+    @FXML private TextField passwordTextField;
 
     @FXML
     private void initialize() {
@@ -57,6 +52,13 @@ public class LoginPageController {
                 loginOutputLabel.setText("Hai effettuato l'accesso.");
 
                 stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource);
+            }
+        });
+        registratiButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                stageHandler.SwitchStageFromEvent(event,stageHandler.registestrationPageResource);
             }
         });
     }

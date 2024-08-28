@@ -11,12 +11,9 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.callback.Callback;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.function.Function;
 
 @Service
@@ -30,10 +27,12 @@ public class StageHandler {
     public Resource mainMenuResource;
     @Value("classpath:/main/components/containers/FilmContainerComponent.fxml")
     public Resource filmContainerResource;
-    @Value("classpath:/main/film/film-detail.fxml")
+    @Value("classpath:/main/films/film-detail.fxml")
     public Resource filmDetailResource;
     @Value("classpath:/main/components/FilmComponent.fxml")
     public Resource filmResource;
+    @Value("classpath:/main/wishlists/wishlist-form.fxml")
+    public Resource wishlistFormResource;
 
     @Value("classpath:/main/authentication/registration-page.fxml")
     public Resource registestrationPageResource;

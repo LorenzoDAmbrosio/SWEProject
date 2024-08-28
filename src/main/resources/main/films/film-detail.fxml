@@ -85,7 +85,12 @@
                                    <Font size="20.0" />
                                </font>
                            </Label>
-                           <Pane prefHeight="43.0" prefWidth="237.0" HBox.hgrow="ALWAYS" />
+                           <Pane prefHeight="43.0" HBox.hgrow="ALWAYS" />
+                           <Button fx:id="editWishlistsButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Aggiungi" textFill="WHITE">
+                               <opaqueInsets>
+                                   <Insets left="20.0" />
+                               </opaqueInsets>
+                           </Button>
                        </items>
                        <padding>
                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
@@ -103,7 +108,12 @@
                                    <Font size="20.0" />
                                </font>
                            </Label>
-                           <Pane prefHeight="43.0" prefWidth="218.0" HBox.hgrow="ALWAYS" />
+                           <Pane prefHeight="43.0" HBox.hgrow="ALWAYS" />
+                            <Button fx:id="addReviewButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Aggiungi" textFill="WHITE">
+                               <opaqueInsets>
+                                  <Insets left="20.0" />
+                               </opaqueInsets>
+                            </Button>
                        </items>
                        <padding>
                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />

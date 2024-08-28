@@ -11,7 +11,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @Entity
-@Table(name="PremiumSub")
+@Table(name="Premium_Subscription")
 @Data @NoArgsConstructor @ToString
 public class PremiumSub extends Subscription implements Serializable  {
 

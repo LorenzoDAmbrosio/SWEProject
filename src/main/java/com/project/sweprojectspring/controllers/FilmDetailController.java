@@ -41,6 +41,8 @@ public class FilmDetailController {
 
     @FXML private Button exitButton;
     @FXML private Button likeButton;
+    @FXML private Button editWishlistsButton;
+    @FXML private Button addReviewButton;
 
 
     @FXML private TableView<Wishlist> wishlistTableView;
@@ -65,6 +67,9 @@ public class FilmDetailController {
         filmAuthor.setText(selectedFilm.getAuthor());
         filmYear.setText(String.valueOf(selectedFilm.getReleaseDate()));
         filmDescription.setText(selectedFilm.getDescription());
+
+        addReviewButton.setVisible(authHandler.IsUserReviewer());
+        editWishlistsButton.setVisible(authHandler.IsUserSubscribed());
 
         Result<List<Wishlist>> wishlistResult= wishlistDao.retrieveAll();
         ObservableList<Wishlist> wishlistRows = FXCollections.observableArrayList();
@@ -107,6 +112,12 @@ public class FilmDetailController {
             }
         });
 
+        editWishlistsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stageHandler.SwitchStageFromEvent(event,stageHandler.wishlistFormResource);
+            }
+        });
     }
 
     private void createReviewsTable(ObservableList<Review> reviews) {
@@ -115,7 +126,7 @@ public class FilmDetailController {
         nameColumn.setCellValueFactory(cellData -> {
             return new ReadOnlyObjectWrapper<>(cellData.getValue().getReviewer().getUsername());
         });
-        nameColumn.setPrefWidth(124);
+        nameColumn.setPrefWidth(115);
         filmReviewsTable.getColumns().add(nameColumn);
 
         TableColumn<Review, String> numFilmsColumn = new TableColumn<>("Recensione");
@@ -125,7 +136,7 @@ public class FilmDetailController {
 
         TableColumn<Review, Date> publishDateColumn = new TableColumn<>("Data");
         publishDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishDate"));
-        publishDateColumn.setPrefWidth(175);
+        publishDateColumn.setPrefWidth(100);
         filmReviewsTable.getColumns().add(publishDateColumn);
 
         filmReviewsTable.setItems(reviews);
@@ -147,22 +158,25 @@ public class FilmDetailController {
                                     public void updateItem(Boolean item, boolean empty) {
                                         super.updateItem(item, empty);
 
-                                        Wishlist wishlist = getTableView().getItems().get(getIndex());
-                                        String btnText = wishlist.containsFilm(selectedFilm) ? "-":"+";
-                                        btn.setText(btnText);
-
                                         if (empty) {
                                             setGraphic(null);
                                             setText(null);
                                         } else {
+                                            Wishlist wishlist = getTableView().getItems().get(getIndex());
+                                            String btnText = wishlist.containsFilm(selectedFilm) ? "-":"+";
+                                            btn.setText(btnText);
+
                                             btn.setOnAction(event -> {
-                                                Wishlist updWishlist = getTableView().getItems().get(getIndex());
                                                 Boolean isFilmInWishlist=wishlist.containsFilm(selectedFilm);
+                                                if(isFilmInWishlist){
+                                                    wishlist.getFilms().remove(selectedFilm);
+                                                }
+                                                else{
+                                                    wishlist.getFilms().add(selectedFilm);
+                                                }
+                                                wishlistDao.update(wishlist);
                                                 String updateText = isFilmInWishlist ? "-":"+";
                                                 btn.setText(updateText);
-
-
-
                                             });
                                             setGraphic(btn);
                                             setText(null);
@@ -173,13 +187,13 @@ public class FilmDetailController {
                             }
                         };
         actionColumn.setCellFactory(cellFactory);
-        actionColumn.setPrefWidth(50);
+        actionColumn.setPrefWidth(70);
         wishlistTableView.getColumns().add(actionColumn);
 
         // Create the "Nome" column
         TableColumn<Wishlist, String> nameColumn = new TableColumn<>("Nome");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameColumn.setPrefWidth(325);
+        nameColumn.setPrefWidth(225);
         wishlistTableView.getColumns().add(nameColumn);
 
         // Create the "N° film" column

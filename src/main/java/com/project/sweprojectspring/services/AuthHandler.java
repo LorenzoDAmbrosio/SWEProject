@@ -2,6 +2,9 @@ package com.project.sweprojectspring.services;
 
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.models.authentications.Customer;
+import com.project.sweprojectspring.models.authentications.Reviewer;
+import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.authentications.User;
 import com.sun.jdi.VoidValue;
 import lombok.Getter;
@@ -22,7 +25,7 @@ public class AuthHandler {
     }
 
     public boolean IsUserLogged(){
-        return loggedUser==null;
+        return loggedUser!=null;
     }
 
     public Result<User> Login(String username,String password){
@@ -118,6 +121,21 @@ public class AuthHandler {
 
 
     }
+
+
+    public boolean IsUserSubscribed(){
+        if(!IsUserLogged()) return false;
+        return loggedUser instanceof SubscribedUser;
+    }
+    public boolean IsUserCustomer(){
+        if(!IsUserLogged()) return false;
+        return loggedUser instanceof Customer;
+    }
+    public boolean IsUserReviewer(){
+        if(!IsUserLogged()) return false;
+        return loggedUser instanceof Reviewer;
+    }
+
 
     public boolean Logout(){
         loggedUser=null;
