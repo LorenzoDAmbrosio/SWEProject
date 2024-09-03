@@ -46,4 +46,15 @@ public class Result<T> {
     public static boolean success(){
         return true;
     }
+
+    @Override
+    public String toString() {
+        if(isSuccessful()){
+            return "OK";
+        }
+        else if(isFailed()){
+            return this.ToError().toString();
+        }
+        return "Non inizializzato";
+    }
 }

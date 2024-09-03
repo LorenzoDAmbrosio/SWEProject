@@ -54,4 +54,10 @@ public class Film implements Serializable  {
     public int hashCode() {
         return Objects.hash(id, title);
     }
+
+    public boolean isInWishlist(Wishlist wishlist) {
+        if(wishlist == null) return false;
+        if(wishlist.getFilms().isEmpty()) return  false;
+        return wishlist.getFilms().contains(this);
+    }
 }

@@ -40,7 +40,7 @@
                                </font>
                            </Label>
                            <Pane prefHeight="43.0" HBox.hgrow="ALWAYS" />
-                           <Button fx:id="editWishlistsButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #2A003C;" text="Seleziona" textFill="WHITE">
+                           <Button fx:id="wishlistSelectButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: #2A003C;" text="Seleziona" textFill="WHITE">
                                <opaqueInsets>
                                    <Insets left="20.0" />
                                </opaqueInsets>
@@ -50,39 +50,50 @@
                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                        </padding>
                    </ToolBar>
-                  <TableView fx:id="wishlistTableView" prefHeight="609.0" prefWidth="400.0" />
+                  <TableView fx:id="wishlistTableView" prefHeight="494.0" prefWidth="325.0" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="400.0">
                <children>
-                   <ToolBar prefHeight="15.0" prefWidth="387.0" style="-fx-background-color: #2A003C; -fx-spacing: 30;">
+                   <ToolBar prefHeight="15.0" prefWidth="387.0" style="-fx-background-color: #2A003C; -fx-spacing: 10;">
                        <items>
-                           <Label fx:id="listNameLabel" prefHeight="30.0" prefWidth="180.0" text="Titolo Wishlist" textFill="WHITE">
-                               <font>
-                                   <Font size="20.0" />
-                               </font>
-                           </Label>
-                           <Pane prefHeight="43.0" HBox.hgrow="ALWAYS" />
-                            <Button fx:id="createEditButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Aggiungi" textFill="WHITE">
+                           <Pane prefHeight="43.0" prefWidth="24.0" HBox.hgrow="ALWAYS" />
+                            <Button fx:id="wishlistCreateButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Aggiungi" textFill="WHITE">
                                <opaqueInsets>
                                   <Insets left="20.0" />
                                </opaqueInsets>
                             </Button>
+                        <Button fx:id="wishlistDeleteButton" disable="true" layoutX="304.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Elimina" textFill="WHITE">
+                           <opaqueInsets>
+                              <Insets left="20.0" />
+                           </opaqueInsets>
+                        </Button>
+                        <Button fx:id="wishlistEditButton" disable="true" layoutX="208.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Modifica" textFill="WHITE">
+                           <opaqueInsets>
+                              <Insets left="20.0" />
+                           </opaqueInsets>
+                        </Button>
                        </items>
                        <padding>
                            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                        </padding>
                    </ToolBar>
-                   <VBox layoutX="303.0" layoutY="200.0" prefHeight="501.0" prefWidth="400.0" style="-fx-spacing: 30; -fx-alignment: center;">
+                   <VBox layoutX="303.0" layoutY="200.0" prefHeight="501.0" prefWidth="400.0" style="-fx-spacing: 10; -fx-alignment: center;">
                    <children>
+                           <Label fx:id="listNameLabel" prefHeight="30.0" prefWidth="377.0" text="Titolo Wishlist" textFill="WHITE">
+                               <font>
+                                   <Font size="20.0" />
+                               </font>
+                           </Label>
                        <TextField fx:id="listNameTextField" promptText="nome lista" />
-                       <TextArea fx:id="ListDescriptionTextField" promptText="descrizione" />
-                       <Label fx:id="loginOutputLabel" textFill="WHITE" />
+                       <TextArea fx:id="listDescriptionTextField" prefHeight="99.0" prefWidth="360.0" promptText="descrizione" />
+                       <Label fx:id="wishlistOutputLabel" textFill="WHITE" />
                    </children>
                      <padding>
                         <Insets left="20.0" right="20.0" />
                      </padding>
                    </VBox>
+                  <TableView fx:id="filmTableView" prefHeight="475.0" prefWidth="400.0" />
                </children>
             </VBox>
          </children>

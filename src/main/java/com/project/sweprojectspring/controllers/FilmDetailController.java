@@ -145,7 +145,7 @@ public class FilmDetailController {
     private void createWishlistTable(ObservableList<Wishlist> wishlistRows) {
 
 
-        TableColumn<Wishlist, Boolean> actionColumn = new TableColumn<>("Aggiungi");
+        TableColumn<Wishlist, Boolean> actionColumn = new TableColumn<>("Assign");
 
         Callback<TableColumn<Wishlist, Boolean>, TableCell<Wishlist, Boolean>> cellFactory =
                         new Callback<TableColumn<Wishlist, Boolean>, TableCell<Wishlist, Boolean>>() {
@@ -153,7 +153,7 @@ public class FilmDetailController {
                             public TableCell call(final TableColumn<Wishlist, Boolean> param) {
                                 final TableCell<Wishlist, Boolean> cell = new TableCell<Wishlist, Boolean>() {
 
-                                    final Button btn = new Button("+");
+                                    final Button btn = new Button("☐");
                                     @Override
                                     public void updateItem(Boolean item, boolean empty) {
                                         super.updateItem(item, empty);
@@ -163,7 +163,7 @@ public class FilmDetailController {
                                             setText(null);
                                         } else {
                                             Wishlist wishlist = getTableView().getItems().get(getIndex());
-                                            String btnText = wishlist.containsFilm(selectedFilm) ? "-":"+";
+                                            String btnText = wishlist.containsFilm(selectedFilm) ? "☐":"☑";
                                             btn.setText(btnText);
 
                                             btn.setOnAction(event -> {
@@ -175,7 +175,8 @@ public class FilmDetailController {
                                                     wishlist.getFilms().add(selectedFilm);
                                                 }
                                                 wishlistDao.update(wishlist);
-                                                String updateText = isFilmInWishlist ? "-":"+";
+                                                // ! perché è stato effettuato un toggle
+                                                String updateText = !isFilmInWishlist ? "☐":"☑";
                                                 btn.setText(updateText);
                                             });
                                             setGraphic(btn);
@@ -186,8 +187,9 @@ public class FilmDetailController {
                                 return cell;
                             }
                         };
+        actionColumn.setStyle( "-fx-alignment: CENTER;");
         actionColumn.setCellFactory(cellFactory);
-        actionColumn.setPrefWidth(70);
+        actionColumn.setPrefWidth(50);
         wishlistTableView.getColumns().add(actionColumn);
 
         // Create the "Nome" column
