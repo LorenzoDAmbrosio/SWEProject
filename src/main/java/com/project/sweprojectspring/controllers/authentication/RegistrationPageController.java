@@ -62,6 +62,10 @@ public class RegistrationPageController {
 
                 authHandler.Login(username,password);
 
+
+                authHandler.Login(username,password);
+
+
                 stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource );
             }
         });

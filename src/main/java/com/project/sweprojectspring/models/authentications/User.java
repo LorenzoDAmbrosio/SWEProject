@@ -12,6 +12,7 @@ import java.util.Objects;
 @Table(name="User")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
+//@data crea i setter e getter
 public class User implements Serializable {
 
     @Id
@@ -39,6 +40,8 @@ public class User implements Serializable {
         User user = (User) o;
         return Objects.equals(id, user.id) && Objects.equals(username, user.username);
     }
+
+
 
     @Override
     public int hashCode() {
