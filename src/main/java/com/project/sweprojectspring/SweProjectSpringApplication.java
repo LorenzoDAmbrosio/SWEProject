@@ -9,6 +9,7 @@ import com.project.sweprojectspring.controllers.authentication.LoginPageControll
 import com.project.sweprojectspring.controllers.authentication.LogoutPageController;
 import com.project.sweprojectspring.daos.FilmDao;
 import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.authentications.ReviewerDao;
 import com.project.sweprojectspring.daos.resources.ReviewDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.services.AuthHandler;
@@ -43,6 +44,8 @@ public class SweProjectSpringApplication {
         return new UserDao();
     }
     @Bean
+    public ReviewerDao reviewerDao(){return new ReviewerDao();}
+    @Bean
     public FilmDao filmDao() {
         return new FilmDao();
     }
@@ -58,7 +61,7 @@ public class SweProjectSpringApplication {
 
     @Bean
     public AuthHandler authHandler() {
-        return new AuthHandler(userDao());
+        return new AuthHandler(userDao(),reviewerDao());
     }
 
     @Bean

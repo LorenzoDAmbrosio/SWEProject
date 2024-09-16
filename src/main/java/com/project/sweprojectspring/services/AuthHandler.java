@@ -2,6 +2,7 @@ package com.project.sweprojectspring.services;
 
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.authentications.ReviewerDao;
 import com.project.sweprojectspring.models.authentications.Customer;
 import com.project.sweprojectspring.models.authentications.Reviewer;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
@@ -19,10 +20,16 @@ public class AuthHandler {
     private User loggedUser = null;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private ReviewerDao reviewerDao;
 
-    public  AuthHandler(UserDao userDao){
+    public  AuthHandler(UserDao userDao, ReviewerDao reviewerDao){
         this.userDao=userDao;
+        this.reviewerDao=reviewerDao;
     }
+
+
+
 
     public boolean IsUserLogged(){
         return loggedUser!=null;
@@ -73,6 +80,17 @@ public class AuthHandler {
         }
         newUser.setPassword(password);
         return userDao.create(newUser);
+    }
+
+    public  Result<Reviewer> DiventaRew(){
+        User subUser = getLoggedUser();
+        Reviewer newReviewer = new Reviewer();
+
+        newReviewer.setUsername(subUser.getUsername());
+        newReviewer.setPassword(subUser.getPassword());
+
+        userDao.delete(subUser);
+        return reviewerDao.create(newReviewer);
     }
 
     public Result<User> Change(String username, String password, String newpassword){
