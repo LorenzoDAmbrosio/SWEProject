@@ -37,15 +37,20 @@ public class StageHandler {
     @Value("classpath:/main/authentication/registration-page.fxml")
     public Resource registestrationPageResource;
 
-    @Value("classpath:/main/profilo.fxml")
+    @Value("classpath:/main/settings/profilo.fxml")
     public Resource profiloPageResource;
 
-    @Value("classpath:/main/billings.fxml")
+    @Value("classpath:/main/settings/billings.fxml")
     public Resource billingsResource;
 
-    @Value("classpath:/main/cambiopassword.fxml")
+    @Value("classpath:/main/settings/cambiopassword.fxml")
     public Resource impostazioniPageResource;
 
+    @Value("classpath:/main/settings/whishlist-page.fxml")
+    public Resource whishlistPageResource;
+
+    @Value("classpath:/main/settings/myreview.fxml")
+    public Resource myreviewPageResource;
 
 
     @Autowired

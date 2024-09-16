@@ -50,7 +50,7 @@ public class ProfiloController {
             myreviewButton.setVisible(true);
        }else {
             RewButton.setVisible(true);
-            myreviewButton.setVisible(false);
+            myreviewButton.setVisible(true);
         }
     }
 
@@ -77,6 +77,9 @@ public class ProfiloController {
             }
         });
 
+
+
+
         BillingsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -87,9 +90,17 @@ public class ProfiloController {
         whishlistButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                stageHandler.SwitchStageFromEvent(event,stageHandler.billingsResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.whishlistPageResource);
             }
         });
+        myreviewButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stageHandler.SwitchStageFromEvent(event,stageHandler.myreviewPageResource);
+            }
+        });
+
+
 
         visibilityRewButton();
         RewButton.setOnAction(new EventHandler<ActionEvent>(){
