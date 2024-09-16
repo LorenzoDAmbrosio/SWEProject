@@ -94,13 +94,11 @@ public class AuthHandler {
             return Result.fail("è richiesta una password");
         }
 
-
         if(password.equals(newpassword)){
             return Result.fail("la nuova password è uguale a quella vecchia");
         }
 
         user.setPassword(newpassword);
-
         return userDao.update(user);
 
 

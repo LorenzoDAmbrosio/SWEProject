@@ -1,4 +1,4 @@
-package com.project.sweprojectspring.controllers;
+package com.project.sweprojectspring.controllers.settings;
 
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.models.authentications.User;
@@ -18,34 +18,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class ProfiloController {
+public class BillingsController {
     @Autowired
     private StageHandler stageHandler;
     @Autowired
     private AuthHandler authHandler;
 
 
-    @FXML
-    private Button ImpostazioniButton;
-    @FXML
-    private Button RewButton;
+
     @FXML
     private Button MainButton;
 
     @FXML
-    private void initialize() {
-        ImpostazioniButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
+    private Button exitButton;
 
-                stageHandler.SwitchStageFromEvent(event,stageHandler.impostazioniPageResource);
-            }
-        });
+
+
+
+    @FXML
+    private void initialize() {
+
         MainButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource);
             }
         });
+
+        exitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stageHandler.SwitchStageFromEvent(event,stageHandler.profiloPageResource);
+            }
+        });
+
+
+
+
+
+
     }
+
+
+
 }

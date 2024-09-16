@@ -40,7 +40,10 @@ public class StageHandler {
     @Value("classpath:/main/profilo.fxml")
     public Resource profiloPageResource;
 
-    @Value("classpath:/main/impostazioni.fxml")
+    @Value("classpath:/main/billings.fxml")
+    public Resource billingsResource;
+
+    @Value("classpath:/main/cambiopassword.fxml")
     public Resource impostazioniPageResource;
 
 
