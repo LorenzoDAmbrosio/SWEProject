@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ReviewerDao extends DAO<Reviewer> {
     @Override
-    public Result<Reviewer> create(Reviewer reviewer) {
+    public Result<Reviewer> create(Reviewer reviewer)  { //non usare
         try {
             entityManager.persist(reviewer);
             return Result.success(reviewer);
@@ -22,17 +22,8 @@ public class ReviewerDao extends DAO<Reviewer> {
             return Result.fail(e);
         }
     }
-
-
     public Result<Boolean> upgradeUser(long subscribedUserId){
-
-        // Definisci la query INSERT
-      //  String sql = "INSERT INTO reviewer (subscribed_user_id) VALUES (:subscribedUserId)";
         try {
-            // Esegui la query utilizzando EntityManager
-//            Reviewer result = entityManager.createNativeQuery(sql)
-//                    .setParameter("subscribedUserId", subscribedUserId)
-//                    .executeUpdate();
             String query="INSERT INTO REVIEWER (SUBSCRIBED_USER_ID)" +
                     " values (:subscribedUserId) ";
 
@@ -42,7 +33,6 @@ public class ReviewerDao extends DAO<Reviewer> {
         }catch (NoResultException e) {
             return Result.fail(e);
         }
-
     }
     @Override
     public Result<List<Reviewer>> retrieveAll() {
