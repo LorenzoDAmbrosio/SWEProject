@@ -7,12 +7,10 @@ import com.project.sweprojectspring.models.authentications.Customer;
 import com.project.sweprojectspring.models.authentications.Reviewer;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.authentications.User;
-import com.sun.jdi.VoidValue;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AuthHandler {
@@ -82,15 +80,20 @@ public class AuthHandler {
         return userDao.create(newUser);
     }
 
-    public  Result<Reviewer> DiventaRew(){
+    @Transactional
+    public boolean DiventaRew(){
         User subUser = getLoggedUser();
         Reviewer newReviewer = new Reviewer();
+        long rewid = subUser.getId();
 
-        newReviewer.setUsername(subUser.getUsername());
-        newReviewer.setPassword(subUser.getPassword());
+        reviewerDao.upgradeUser(rewid);
+        User filter = new User(subUser.getId());
+        Result<User> foundUserResult=userDao.retrieveOne(filter);
 
-        userDao.delete(subUser);
-        return reviewerDao.create(newReviewer);
+        if(foundUserResult.isSuccessful()){
+            loggedUser=foundUserResult.ToValue();
+        }
+        return true;
     }
 
     public Result<User> Change(String username, String password, String newpassword){

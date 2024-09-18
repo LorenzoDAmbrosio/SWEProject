@@ -3,9 +3,11 @@ package com.project.sweprojectspring.daos.authentications;
 import com.project.sweprojectspring.base.DAO;
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.models.authentications.Reviewer;
+import jakarta.persistence.NoResultException;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.List;
+
 
 public class ReviewerDao extends DAO<Reviewer> {
     @Override
@@ -21,6 +23,27 @@ public class ReviewerDao extends DAO<Reviewer> {
         }
     }
 
+
+    public Result<Boolean> upgradeUser(long subscribedUserId){
+
+        // Definisci la query INSERT
+      //  String sql = "INSERT INTO reviewer (subscribed_user_id) VALUES (:subscribedUserId)";
+        try {
+            // Esegui la query utilizzando EntityManager
+//            Reviewer result = entityManager.createNativeQuery(sql)
+//                    .setParameter("subscribedUserId", subscribedUserId)
+//                    .executeUpdate();
+            String query="INSERT INTO REVIEWER (SUBSCRIBED_USER_ID)" +
+                    " values (:subscribedUserId) ";
+
+             entityManager.createNativeQuery(query).setParameter("subscribedUserId",subscribedUserId)
+                     .executeUpdate();
+       return Result.success(true);
+        }catch (NoResultException e) {
+            return Result.fail(e);
+        }
+
+    }
     @Override
     public Result<List<Reviewer>> retrieveAll() {
         return null;

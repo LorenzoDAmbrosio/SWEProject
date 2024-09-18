@@ -101,6 +101,10 @@ public class ProfiloController {
             @Override
             public void handle(ActionEvent event){
                 authHandler.DiventaRew();
+
+                authHandler.getLoggedUser();
+                stageHandler.SwitchStageFromEvent(event,stageHandler.profiloPageResource);
+                visibilityRewButton();
             }
         });
         visibilityAdminStuff();
