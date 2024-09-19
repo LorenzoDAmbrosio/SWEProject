@@ -4,14 +4,13 @@ import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.models.authentications.User;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
+import com.project.sweprojectspring.models.billings.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +35,30 @@ public class RegistrationPageController {
     private Button fattoButton;
     @FXML
     private Label registrationOutputLable;
+    @FXML
+    private RadioButton standardRadioButton;
+    @FXML
+    private RadioButton premiumRadioButton;
+
 
 @FXML
     private void initialize() {
-        fattoButton.setOnAction(new EventHandler<ActionEvent>() {
+    ToggleGroup group = new ToggleGroup();
+    standardRadioButton.setToggleGroup(group);
+    standardRadioButton.setSelected(true);
+    premiumRadioButton.setToggleGroup(group);
+
+    fattoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String username = null;
                 String password = null;
                 String repassword =null;
+
+
+
+
+
 
                 username=usernameTextField.getText();
                 password=passwordTextField.getText();
@@ -65,6 +79,8 @@ public class RegistrationPageController {
 
                 authHandler.Login(username,password);
 
+                if(standardRadioButton.isSelected()) {authHandler.RegisterStandardSubscription();
+                } else {authHandler.RegisterPremiumSubscription();}
 
                 stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource );
             }

@@ -32,6 +32,8 @@ public class ProfiloController {
     private Button whishlistButton;
     @FXML
     private Button myreviewButton;
+    @FXML
+    private Button qButton;
 
 
     @FXML
@@ -92,6 +94,13 @@ public class ProfiloController {
                 stageHandler.SwitchStageFromEvent(event,stageHandler.myreviewPageResource);
             }
         });
+
+//        qButton.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//
+//            }
+//        });
 
 //----------------------------------------------------------------------------------------------------------------------
         //central bar

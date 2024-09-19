@@ -11,7 +11,23 @@ import java.util.List;
 public class SubscribedUserDao extends DAO<SubscribedUser>{
     @Override
     public Result<SubscribedUser> create(SubscribedUser subscribedUser) {
+
         return null;
+    }
+
+    public Result<Boolean> compilaSubscribed(long userid, long subid){
+        try {
+            String query = "INSERT INTO SUBSCRIBED_USER (USER_ID,SUBSCRIPTION_ID)" +
+                    " values (:userid,:subid) ";
+            entityManager.createNativeQuery(query)
+                    .setParameter("userid",userid)
+                    .setParameter("subid",subid)
+                    .executeUpdate();
+
+            return Result.success(true);
+        }catch (NoResultException e) {
+            return Result.fail(e);
+        }
     }
 
     @Override

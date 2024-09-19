@@ -28,5 +28,11 @@
             </Button>
          </children>
       </VBox>
+      <VBox layoutX="334.0" layoutY="122.0" prefHeight="77.0" prefWidth="139.0" style="-fx-spacing: 30; -fx-alignment: center;">
+         <children>
+            <RadioButton mnemonicParsing="false" text="Premium" textFill="WHITE"  fx:id="premiumRadioButton"/>
+            <RadioButton mnemonicParsing="false" text="Standard" textFill="WHITE"  fx:id="standardRadioButton"/>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

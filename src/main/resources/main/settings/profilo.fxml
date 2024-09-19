@@ -48,7 +48,7 @@
                         </font>
                      </Button>
                      <Button fx:id="whishlistButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="Whishlists" textFill="WHITE"/>
-                     <Button  mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="fa qualcosa" textFill="WHITE" />
+                     <Button fx:id="qButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="fa qualcosa" textFill="WHITE" />
                      <Button fx:id="myreviewButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="My Review" textFill="WHITE" />
                   </children>
                </VBox>
