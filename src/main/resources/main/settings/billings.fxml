@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -14,7 +15,7 @@
                 </font>
             </Button>
 
-            <Separator prefHeight="63.0" prefWidth="431.0" visible="false" />
+            <Separator prefHeight="63.0" prefWidth="270.0" visible="false" />
             <Button fx:id="exitButton" layoutX="181.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Esci" textFill="WHITE">
                 <opaqueInsets>
                     <Insets left="20.0" />
@@ -28,9 +29,60 @@
             <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
         </padding>
     </ToolBar>
-   <Label alignment="CENTER" layoutX="21.0" layoutY="80.0" prefHeight="44.0" prefWidth="223.0" text="il tuo abbonamento" textFill="WHITE">
+   <Label alignment="CENTER" layoutX="21.0" layoutY="80.0" prefHeight="44.0" prefWidth="223.0" text="il tuo abbonamento:" textFill="WHITE">
       <font>
          <Font size="21.0" />
       </font>
    </Label>
+   <Label fx:id="standardLable" alignment="CENTER" contentDisplay="CENTER" layoutX="244.0" layoutY="80.0" prefHeight="50.0" prefWidth="186.0" text="Standard" textFill="WHITE">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </Label>
+   <Label fx:id="premiumLable" alignment="CENTER" layoutX="244.0" layoutY="80.0" prefHeight="50.0" prefWidth="186.0" text="Premium" textFill="WHITE">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </Label>
+   <VBox layoutX="46.0" layoutY="130.0" prefHeight="257.0" prefWidth="186.0">
+      <children>
+         <Label prefHeight="58.0" prefWidth="184.0" text="abbonamento standard:" textFill="WHITE">
+            <font>
+               <Font size="17.0" />
+            </font>
+         </Label>
+         <Label prefHeight="55.0" prefWidth="187.0" text="Solo 3 possibili liste" textFill="WHITE" />
+      </children>
+   </VBox>
+   <Separator layoutX="229.0" layoutY="124.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="6.0" />
+   <VBox layoutX="244.0" layoutY="130.0" prefHeight="271.0" prefWidth="186.0">
+      <children>
+         <Label prefHeight="60.0" prefWidth="195.0" text="Abbonamento PREMIUM:" textFill="WHITE">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Label>
+         <Label prefHeight="41.0" prefWidth="190.0" text="Tutte le liste che vuoi" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Label>
+      </children>
+   </VBox>
+   <Label fx:id="Rewlable" layoutX="495.0" layoutY="116.0" prefHeight="99.0" prefWidth="214.0" text="Vuoi diventare un Reviewer?" textFill="WHITE">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Label>
+    <Label fx:id="Rewalable" layoutX="505.0" layoutY="116.0" prefHeight="99.0" prefWidth="214.0" text="SEI UN REVIEWER" textFill="WHITE">
+        <font>
+            <Font size="16.0" />
+        </font>
+    </Label>
+   <Button fx:id="RewButton" layoutX="498.0" layoutY="201.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="208.0" style="-fx-background-color: #2A003C;" text="Diventa Reviewer" textFill="WHITE" />
+   <Button fx:id="goreviewButton" layoutX="590.0" layoutY="342.0" mnemonicParsing="false" style="-fx-background-color: #160020;" text="Vai alle tue Review" textFill="WHITE">
+      <effect>
+         <Bloom />
+      </effect></Button>
 </AnchorPane>
+

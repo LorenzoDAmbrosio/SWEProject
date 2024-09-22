@@ -14,15 +14,9 @@
                 </font>
             </Button>
 
-            <Separator prefHeight="63.0" prefWidth="197.0" visible="false" />
+            <Separator prefHeight="63.0" prefWidth="361.0" visible="false" />
 
-            <Button fx:id="RewButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: #2A003C;" text="Diventa Reviewer" textFill="WHITE">
-                <opaqueInsets>
-                    <Insets left="20.0" />
-                </opaqueInsets>
-                <font>
-                    <Font size="15.0" />
-                </font></Button>
+
             <Button fx:id="ImpostazioniButton" layoutX="181.0" layoutY="16.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="140.0" style="-fx-background-color: #2A003C;" text="Cambia password" textFill="WHITE">
                 <opaqueInsets>
                     <Insets left="20.0" />
@@ -47,7 +41,7 @@
                            <Font size="25.0" />
                         </font>
                      </Button>
-                     <Button fx:id="whishlistButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="Whishlists" textFill="WHITE"/>
+                     <Button fx:id="whishlistButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="Whishlists" textFill="WHITE" />
                      <Button fx:id="qButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="fa qualcosa" textFill="WHITE" />
                      <Button fx:id="myreviewButton" mnemonicParsing="false" prefHeight="63.0" prefWidth="237.0" style="-fx-background-color: #2A003C;" text="My Review" textFill="WHITE" />
                   </children>
@@ -67,7 +61,7 @@
                         <children>
                            <Button fx:id="GestiscoButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="512.0" style="-fx-background-color: #2A003C;" text="Gestisci Film" textFill="WHITE" />
                            <Button fx:id="ReportButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="512.0" style="-fx-background-color: #2A003C;" text="Report" textFill="WHITE" />
-                           <Button fx:id="AdministratuonButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="518.0" style="-fx-background-color: #2A003C;" text="Administration" textFill="WHITE"/>
+                           <Button fx:id="AdministratuonButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="518.0" style="-fx-background-color: #2A003C;" text="Administration" textFill="WHITE" />
                         </children>
                      </VBox>
                   </children>

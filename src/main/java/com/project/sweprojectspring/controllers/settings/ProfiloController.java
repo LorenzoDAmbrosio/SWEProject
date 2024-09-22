@@ -21,8 +21,6 @@ public class ProfiloController {
     @FXML
     private Button ImpostazioniButton;
     @FXML
-    private Button RewButton;
-    @FXML
     private Button MainButton;
     @FXML
     private Button BillingsButton;
@@ -35,23 +33,20 @@ public class ProfiloController {
     @FXML
     private Button qButton;
 
-
     @FXML
-    private void visibilityRewButton(){
+    private void visibilityRew(){
         if (authHandler.IsUserReviewer()){
-            RewButton.setVisible(false);
             myreviewButton.setVisible(true);
        }else {
-            RewButton.setVisible(true);
             myreviewButton.setVisible(false);
         }
     }
 
     @FXML
     private void visibilityAdminStuff(){
-        if (authHandler.IsUserSubscribed() || authHandler.IsUserReviewer()){
+        if (authHandler.IsUserSubscribed()){
             adminStuff.setVisible(false);
-        }else adminStuff.setVisible(false);
+        }else adminStuff.setVisible(true);
     }
 
     @FXML
@@ -85,7 +80,7 @@ public class ProfiloController {
         whishlistButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                stageHandler.SwitchStageFromEvent(event,stageHandler.whishlistPageResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.wishlistFormResource);
             }
         });
         myreviewButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -105,17 +100,8 @@ public class ProfiloController {
 //----------------------------------------------------------------------------------------------------------------------
         //central bar
 
-        visibilityRewButton();
-        RewButton.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                authHandler.DiventaRew();
+       visibilityRew();
 
-                authHandler.getLoggedUser();
-                stageHandler.SwitchStageFromEvent(event,stageHandler.profiloPageResource);
-                visibilityRewButton();
-            }
-        });
         visibilityAdminStuff();
     }
 }

@@ -191,6 +191,7 @@ public class AuthHandler {
         if(!IsUserLogged()) return false;
         return loggedUser instanceof SubscribedUser;
     }
+
     public boolean IsUserCustomer(){
         if(!IsUserLogged()) return false;
         return loggedUser instanceof Customer;
