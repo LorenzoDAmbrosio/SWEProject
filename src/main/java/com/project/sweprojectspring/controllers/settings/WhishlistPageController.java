@@ -54,12 +54,5 @@ public class WhishlistPageController {
                 stageHandler.SwitchStageFromEvent(event,stageHandler.profiloPageResource);
             }
         });
-
-
-
-
-
-
     }
-
 }

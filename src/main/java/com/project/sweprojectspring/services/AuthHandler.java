@@ -2,13 +2,23 @@ package com.project.sweprojectspring.services;
 
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.authentications.ReviewerDao;
+import com.project.sweprojectspring.daos.authentications.SubscribedUserDao;
+import com.project.sweprojectspring.daos.billings.PremiumSubDao;
+import com.project.sweprojectspring.daos.billings.StandardSubDao;
 import com.project.sweprojectspring.models.authentications.Customer;
 import com.project.sweprojectspring.models.authentications.Reviewer;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.authentications.User;
+import com.project.sweprojectspring.models.billings.PremiumSub;
+import com.project.sweprojectspring.models.billings.StandardSub;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Time;
+import java.util.Date;
 
 @Service
 public class AuthHandler {
@@ -16,10 +26,22 @@ public class AuthHandler {
     private User loggedUser = null;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private ReviewerDao reviewerDao;
+    @Autowired
+    private SubscribedUserDao subscribedUserDao;
+    @Autowired
+    private StandardSubDao standardSubDao;
+    @Autowired
+    private PremiumSubDao premiumSubDao;
 
-    public  AuthHandler(UserDao userDao){
+
+    public  AuthHandler(UserDao userDao, ReviewerDao reviewerDao, SubscribedUserDao subscribedUserDao){
         this.userDao=userDao;
     }
+
+
+
 
     public boolean IsUserLogged(){
         return loggedUser!=null;
@@ -70,6 +92,69 @@ public class AuthHandler {
         }
         newUser.setPassword(password);
         return userDao.create(newUser);
+    }
+
+    public Result<Boolean> RegisterStandardSubscription(){
+        StandardSub sb = new StandardSub();
+        Date subscriptionStart= new Date();
+
+        Time subscriptionDuration = new Time(200000*1000);
+
+        sb.setSubscriptionDuration(subscriptionDuration);
+        sb.setSubscriptionStart(subscriptionStart);
+
+        standardSubDao.create(sb);
+        AssociaUserSubscription(sb.getId());
+
+        return Result.success(true);
+    }
+    public Result<Boolean> RegisterPremiumSubscription(){
+        PremiumSub pb = new PremiumSub();
+        Date subscriptionStart= new Date();
+
+        Time subscriptionDuration = new Time(200000*1000);
+
+        pb.setSubscriptionDuration(subscriptionDuration);
+        pb.setSubscriptionStart(subscriptionStart);
+
+        premiumSubDao.create(pb);
+        AssociaUserSubscription(pb.getId());
+
+        return Result.success(true);
+    }
+
+
+
+    @Transactional
+    public boolean DiventaRew(){
+        User subUser = getLoggedUser();
+        Reviewer newReviewer = new Reviewer();
+        long rewid = subUser.getId();
+
+        reviewerDao.upgradeUser(rewid);
+        User filter = new User(subUser.getId());
+        Result<User> foundUserResult=userDao.retrieveOne(filter);
+
+        if(foundUserResult.isSuccessful()){
+            loggedUser=foundUserResult.toValue();
+        }
+        return true;
+    }
+    @Transactional
+    public boolean AssociaUserSubscription(long subid){
+        User subUser = getLoggedUser();
+        long usid = subUser.getId();
+
+
+        subscribedUserDao.compilaSubscribed(usid,subid);
+        User filter = new User(subUser.getId());
+
+        Result<User> foundUserResult=userDao.retrieveOne(filter);
+
+        if(foundUserResult.isSuccessful()){
+            loggedUser=foundUserResult.toValue();
+        }
+        return true;
     }
 
     public Result<User> Change(String username, String password, String newpassword){

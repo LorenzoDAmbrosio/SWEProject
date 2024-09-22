@@ -47,7 +47,7 @@ public class StageHandler {
     public Resource billingsResource;
 
     @Value("classpath:/main/settings/cambiopassword.fxml")
-    public Resource impostazioniPageResource;
+    public Resource cambiopasswordPageResource;
 
     @Value("classpath:/main/settings/whishlist-page.fxml")
     public Resource whishlistPageResource;

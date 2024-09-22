@@ -1,22 +1,13 @@
 package com.project.sweprojectspring.controllers.settings;
 
-import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.models.authentications.User;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -41,6 +32,8 @@ public class ProfiloController {
     private Button whishlistButton;
     @FXML
     private Button myreviewButton;
+    @FXML
+    private Button qButton;
 
 
     @FXML
@@ -50,7 +43,7 @@ public class ProfiloController {
             myreviewButton.setVisible(true);
        }else {
             RewButton.setVisible(true);
-            myreviewButton.setVisible(true);
+            myreviewButton.setVisible(false);
         }
     }
 
@@ -63,11 +56,12 @@ public class ProfiloController {
 
     @FXML
     private void initialize() {
+        //top bar
         ImpostazioniButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 
-                stageHandler.SwitchStageFromEvent(event,stageHandler.impostazioniPageResource);
+                stageHandler.SwitchStageFromEvent(event,stageHandler.cambiopasswordPageResource);
             }
         });
         MainButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -79,7 +73,8 @@ public class ProfiloController {
 
 
 
-
+//----------------------------------------------------------------------------------------------------------------------
+        //side bar
         BillingsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -100,14 +95,25 @@ public class ProfiloController {
             }
         });
 
+//        qButton.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//
+//            }
+//        });
 
+//----------------------------------------------------------------------------------------------------------------------
+        //central bar
 
         visibilityRewButton();
         RewButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event){
+                authHandler.DiventaRew();
 
-                //dai privilegi reviewer
+                authHandler.getLoggedUser();
+                stageHandler.SwitchStageFromEvent(event,stageHandler.profiloPageResource);
+                visibilityRewButton();
             }
         });
         visibilityAdminStuff();

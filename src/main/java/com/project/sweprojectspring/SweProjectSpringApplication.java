@@ -9,7 +9,10 @@ import com.project.sweprojectspring.controllers.authentication.LoginPageControll
 import com.project.sweprojectspring.controllers.authentication.LogoutPageController;
 import com.project.sweprojectspring.daos.FilmDao;
 import com.project.sweprojectspring.daos.UserDao;
-import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
+import com.project.sweprojectspring.daos.authentications.ReviewerDao;
+import com.project.sweprojectspring.daos.authentications.SubscribedUserDao;
+import com.project.sweprojectspring.daos.billings.PremiumSubDao;
+import com.project.sweprojectspring.daos.billings.StandardSubDao;
 import com.project.sweprojectspring.daos.resources.ReviewDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.services.AuthHandler;
@@ -44,6 +47,8 @@ public class SweProjectSpringApplication {
         return new UserDao();
     }
     @Bean
+    public ReviewerDao reviewerDao(){return new ReviewerDao();}
+    @Bean
     public FilmDao filmDao() {
         return new FilmDao();
     }
@@ -56,16 +61,16 @@ public class SweProjectSpringApplication {
         return new ReviewDao();
     }
     @Bean
-    public AddToWishlistActionDao addToWishlistActionDao() {
-        return new AddToWishlistActionDao();
-    }
-
-
+    public SubscribedUserDao subscribedUserDao(){return new SubscribedUserDao();}
+    @Bean
+    public StandardSubDao standardSubDao(){return new StandardSubDao();}
+    @Bean
+    public PremiumSubDao premiumSubDao(){return new PremiumSubDao();}
     //endregion
 
     @Bean
     public AuthHandler authHandler() {
-        return new AuthHandler(userDao());
+        return new AuthHandler(userDao(),reviewerDao(),subscribedUserDao());
     }
 
     @Bean

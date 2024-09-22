@@ -56,10 +56,6 @@ UserDao extends DAO<User>{
     @Override
     public Result<User> update(User user) {
         try {
-//            Result<User> userToUpdateResult = retrieveOne(user);
-//            if (userToUpdateResult.isFailed()) {
-//                return Result.fail("User not found");
-//            }
             entityManager.merge(user);
             return Result.success(user);
 
