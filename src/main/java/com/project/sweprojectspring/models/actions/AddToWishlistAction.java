@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name="Add_To_Wishlist_Action")
@@ -18,4 +19,12 @@ public class AddToWishlistAction extends CallToAction implements Serializable  {
     public int getInteractionValue() {
         return 3;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AddToWishlistAction that)) return false;
+        return Objects.equals(super.getFilm(), that.getFilm()) && Objects.equals(super.getSubscribedUser(), that.getSubscribedUser());
+    }
+
 }

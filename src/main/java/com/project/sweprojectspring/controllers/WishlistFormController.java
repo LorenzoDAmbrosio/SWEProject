@@ -2,7 +2,9 @@ package com.project.sweprojectspring.controllers;
 
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.daos.FilmDao;
+import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
+import com.project.sweprojectspring.models.actions.AddToWishlistAction;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Wishlist;
@@ -22,7 +24,9 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class WishlistFormController {
@@ -51,6 +55,8 @@ public class WishlistFormController {
     private StageHandler stageHandler;
     @Autowired
     private WishlistDao wishlistDao;
+    @Autowired
+    private AddToWishlistActionDao addToWishlistActionDao;
     @Autowired
     private FilmDao filmDao;
     @Autowired
@@ -109,9 +115,11 @@ public class WishlistFormController {
                 Result<Wishlist> result= wishlistDao.create(newWishlist);
 
                 wishlistOutputLabel.setText(result.toString());
+                if(result.isFailed())
+                    return;
 
                 setupWishlistTable();
-                wishlistTableView.getSelectionModel().select(result.ToValue());
+                wishlistTableView.getSelectionModel().select(result.toValue());
                 WishlistSelection();
                 createFilmTable();
                 setupFilmTable();
@@ -128,13 +136,30 @@ public class WishlistFormController {
                 editWishlist.setName(listNameTextField.getText());
                 editWishlist.setDescription(listDescriptionTextField.getText());
 
-                Result<Wishlist> result= wishlistDao.update(editWishlist);
+                Set<Film> films=selectedWishlist.getFilms();
 
+                Result<Wishlist> result= wishlistDao.update(editWishlist);
                 wishlistOutputLabel.setText(result.toString());
+                if(result.isFailed()) {
+                    return;
+                }
+                List<AddToWishlistAction> currentCallToActions= new ArrayList<>();
+                for(Film film : films){
+                    AddToWishlistAction callToAction=new AddToWishlistAction();
+                    callToAction.setFilm(film);
+                    callToAction.setSubscribedUser((SubscribedUser) authHandler.getLoggedUser());
+                    currentCallToActions.add(callToAction);
+                }
+                addToWishlistActionDao.Sync(currentCallToActions,
+                        old->{
+                            if(!old.getSubscribedUser().equals(authHandler.getLoggedUser()))
+                                return true;
+                            return false;
+                        });
 
                 createWishlistTable();
                 setupWishlistTable();
-                wishlistTableView.getSelectionModel().select(result.ToValue());
+                wishlistTableView.getSelectionModel().select(result.toValue());
                 WishlistSelection();
                 createFilmTable();
                 setupFilmTable();
@@ -188,7 +213,7 @@ public class WishlistFormController {
         wishlistTableView.setItems(FXCollections.observableArrayList());
         Result<List<Wishlist>> wishlistResult= wishlistDao.retrieveAll();
         ObservableList<Wishlist> wishlistRows = FXCollections.observableArrayList();
-        List<Wishlist> wishlists=wishlistResult.ToValue();
+        List<Wishlist> wishlists=wishlistResult.toValue();
         wishlists.removeIf(wishlist -> {
             if(!authHandler.IsUserLogged()) return true;
             return !wishlist.getSubscribedUser().equals(authHandler.getLoggedUser());
@@ -227,7 +252,7 @@ public class WishlistFormController {
         filmTableView.setItems(FXCollections.observableArrayList());
         Result<List<Film>> filmResult= filmDao.retrieveAll();
         ObservableList<Film> filmRows = FXCollections.observableArrayList();
-        List<Film> films=filmResult.ToValue();
+        List<Film> films=filmResult.toValue();
         films.removeIf(wishlist -> {
             if(!authHandler.IsUserLogged())
                 return true;

@@ -6,12 +6,9 @@ import com.project.sweprojectspring.models.authentications.Customer;
 import com.project.sweprojectspring.models.authentications.Reviewer;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.authentications.User;
-import com.sun.jdi.VoidValue;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AuthHandler {
@@ -49,7 +46,7 @@ public class AuthHandler {
         Result<User> foundUserResult=userDao.retrieveOne(new User(username,password));
 
         if(foundUserResult.isSuccessful()){
-            loggedUser=foundUserResult.ToValue();
+            loggedUser=foundUserResult.toValue();
         }
 
         return foundUserResult;

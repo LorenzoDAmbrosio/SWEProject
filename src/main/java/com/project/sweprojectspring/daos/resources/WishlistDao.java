@@ -2,6 +2,8 @@ package com.project.sweprojectspring.daos.resources;
 
 import com.project.sweprojectspring.base.DAO;
 import com.project.sweprojectspring.base.Result;
+import com.project.sweprojectspring.models.authentications.SubscribedUser;
+import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Wishlist;
 import jakarta.persistence.NoResultException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,6 +15,8 @@ import java.util.List;
 public class WishlistDao extends DAO<Wishlist> {
     @Override
     public Result<Wishlist> create(Wishlist wishlist) {
+        if(wishlist.getName().isEmpty())
+            return  Result.fail("Assegnare un nome");
         try {
             entityManager.persist(wishlist);
             return Result.success(wishlist);
@@ -63,7 +67,7 @@ public class WishlistDao extends DAO<Wishlist> {
                 return Result.fail("Wishlist not found");
             }
 
-            Wishlist existingWishlist = existingWishlistResult.ToValue();
+            Wishlist existingWishlist = existingWishlistResult.toValue();
 
             // Aggiorna i campi della wishlist esistente con i valori della nuova wishlist
             existingWishlist.setName(wishlist.getName());
@@ -88,8 +92,8 @@ public class WishlistDao extends DAO<Wishlist> {
             if (wishlistToDeleteResult.isFailed()) {
                 return Result.fail("Film not found");
             }
-            entityManager.remove(wishlistToDeleteResult.ToValue());
-            return Result.success(wishlistToDeleteResult.ToValue());
+            entityManager.remove(wishlistToDeleteResult.toValue());
+            return Result.success(wishlistToDeleteResult.toValue());
         } catch (Exception e) {
             return Result.fail(e);
         }
@@ -111,5 +115,24 @@ public class WishlistDao extends DAO<Wishlist> {
                 .getSingleResult();
         return count;
     }
+
+    public Result<Long> filmExistsInUserWishlists(SubscribedUser user, Film film) {
+        try {
+            // Query JPQL per verificare se il film esiste in una delle wishlist dell'utente
+            Long count = entityManager.createQuery(
+                            "SELECT COUNT(w) FROM Wishlist w JOIN w.films f WHERE w.subscribedUser.id = :userId AND f.id = :filmId", Long.class)
+                    .setParameter("userId", user.getId())
+                    .setParameter("filmId", film.getId())
+                    .getSingleResult();
+
+            // Se il conteggio è maggiore di 0, il film è presente in almeno una wishlist
+            return Result.success(count);
+        } catch (Exception e) {
+            // Gestione di eventuali errori
+            return Result.fail(e);
+        }
+    }
+
+
 
 }

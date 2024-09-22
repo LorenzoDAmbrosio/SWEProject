@@ -25,7 +25,7 @@ public class Result<T> {
     public boolean isSuccessful(){
         return error==null;
     }
-    public T ToValue(){
+    public T toValue(){
         return value;
     }
 

@@ -109,7 +109,7 @@
                                </font>
                            </Label>
                            <Pane prefHeight="43.0" HBox.hgrow="ALWAYS" />
-                            <Button fx:id="addReviewButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Aggiungi" textFill="WHITE">
+                            <Button fx:id="editReviewButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Aggiungi" textFill="WHITE">
                                <opaqueInsets>
                                   <Insets left="20.0" />
                                </opaqueInsets>

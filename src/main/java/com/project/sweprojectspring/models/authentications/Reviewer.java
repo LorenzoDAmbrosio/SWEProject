@@ -10,6 +10,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -19,10 +20,23 @@ import java.util.Set;
 public class Reviewer extends SubscribedUser implements Serializable  {
 
 
-    @OneToMany(mappedBy="reviewer")
+    @OneToMany(mappedBy="reviewer",fetch = FetchType.EAGER)
     private Set<Review> Reviews=new HashSet<>();
 
     public Reviewer(String Username, String password){
         super(Username,password);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Reviewer reviewer)) return false;
+        if (!super.equals(o)) return false;
+        return this.getId()==reviewer.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode());
     }
 }

@@ -7,21 +7,12 @@ import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 @Controller
 public class FilmContainerComponent extends AnchorPane {
@@ -52,7 +43,7 @@ public class FilmContainerComponent extends AnchorPane {
 
         int columns = grid.getColumnCount();
         int i = 0;
-        for (Film film : filmsResult.ToValue()) {
+        for (Film film : filmsResult.toValue()) {
             int row = i / columns;
             int col = i % columns;
             FilmComponent filmComponent=new FilmComponent();

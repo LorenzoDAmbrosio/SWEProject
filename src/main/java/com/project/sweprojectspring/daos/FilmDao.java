@@ -68,8 +68,8 @@ public class FilmDao extends DAO<Film> {
             if (filmToDeleteResult.isFailed()) {
                 return Result.fail("Film not found");
             }
-            entityManager.remove(filmToDeleteResult.ToValue());
-            return Result.success(filmToDeleteResult.ToValue());
+            entityManager.remove(filmToDeleteResult.toValue());
+            return Result.success(filmToDeleteResult.toValue());
         } catch (Exception e) {
             return Result.fail(e);
         }

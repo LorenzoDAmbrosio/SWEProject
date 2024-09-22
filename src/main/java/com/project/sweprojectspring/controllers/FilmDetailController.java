@@ -1,8 +1,10 @@
 package com.project.sweprojectspring.controllers;
 
 import com.project.sweprojectspring.base.Result;
+import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.daos.resources.ReviewDao;
+import com.project.sweprojectspring.models.actions.AddToWishlistAction;
 import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Review;
 import com.project.sweprojectspring.models.resources.Wishlist;
@@ -23,6 +25,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class FilmDetailController {
     @FXML private Button exitButton;
     @FXML private Button likeButton;
     @FXML private Button editWishlistsButton;
-    @FXML private Button addReviewButton;
+    @FXML private Button editReviewButton;
 
 
     @FXML private TableView<Wishlist> wishlistTableView;
@@ -54,6 +57,8 @@ public class FilmDetailController {
     private WishlistDao wishlistDao;
     @Autowired
     private ReviewDao reviewDao;
+    @Autowired
+    private AddToWishlistActionDao addToWishlistActionDao;
     @Autowired
     private AuthHandler authHandler;
 
@@ -68,24 +73,15 @@ public class FilmDetailController {
         filmYear.setText(String.valueOf(selectedFilm.getReleaseDate()));
         filmDescription.setText(selectedFilm.getDescription());
 
-        addReviewButton.setVisible(authHandler.IsUserReviewer());
+        editReviewButton.setVisible(authHandler.IsUserReviewer());
         editWishlistsButton.setVisible(authHandler.IsUserSubscribed());
 
-        Result<List<Wishlist>> wishlistResult= wishlistDao.retrieveAll();
-        ObservableList<Wishlist> wishlistRows = FXCollections.observableArrayList();
-        List<Wishlist> wishlists=wishlistResult.ToValue();
-        wishlists.removeIf(wishlist -> {
-            if(!authHandler.IsUserLogged()) return true;
-            return !wishlist.getSubscribedUser().equals(authHandler.getLoggedUser());
-        });
-        if(!wishlists.isEmpty()) {
-            wishlistRows.addAll(wishlists);
-        }
-        createWishlistTable(wishlistRows);
+        setupWishlistTable();
+        createWishlistTable();
 
         Result<List<Review>> reviewsResult= reviewDao.retrieveAll();
         ObservableList<Review> reviewsRows = FXCollections.observableArrayList();
-        List<Review> reviews=reviewsResult.ToValue();
+        List<Review> reviews=reviewsResult.toValue();
         reviews.removeIf(review -> {
             return !review.getFilm().equals(selectedFilm);
         });
@@ -118,6 +114,30 @@ public class FilmDetailController {
                 stageHandler.SwitchStageFromEvent(event,stageHandler.wishlistFormResource);
             }
         });
+        editReviewButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stageHandler.SwitchStageFromEvent(event,stageHandler.reviewFormResource,
+                    (ReviewFormController controller)->{
+                    controller.setSelectedFilm(selectedFilm);
+                    return controller;
+                });
+            }
+        });
+    }
+
+    private void setupWishlistTable() {
+        Result<List<Wishlist>> wishlistResult= wishlistDao.retrieveAll();
+        ObservableList<Wishlist> wishlistRows = FXCollections.observableArrayList();
+        List<Wishlist> wishlists=wishlistResult.toValue();
+        wishlists.removeIf(wishlist -> {
+            if(!authHandler.IsUserLogged()) return true;
+            return !wishlist.getSubscribedUser().equals(authHandler.getLoggedUser());
+        });
+        if(!wishlists.isEmpty()) {
+            wishlistRows.addAll(wishlists);
+        }
+        wishlistTableView.setItems(wishlistRows);
     }
 
     private void createReviewsTable(ObservableList<Review> reviews) {
@@ -134,16 +154,25 @@ public class FilmDetailController {
         numFilmsColumn.setPrefWidth(175);
         filmReviewsTable.getColumns().add(numFilmsColumn);
 
-        TableColumn<Review, Date> publishDateColumn = new TableColumn<>("Data");
-        publishDateColumn.setCellValueFactory(new PropertyValueFactory<>("publishDate"));
-        publishDateColumn.setPrefWidth(100);
-        filmReviewsTable.getColumns().add(publishDateColumn);
+        TableColumn<Review, String> releaseDateColumn = new TableColumn<>("Data");
+        releaseDateColumn.setCellValueFactory(cellData -> {
+            Date publishDate = cellData.getValue().getPublishDate();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+            String coltext="";
+            if(publishDate != null)
+                coltext=formatter.format(publishDate);
+
+            return new ReadOnlyObjectWrapper<>(coltext);
+        });
+        releaseDateColumn.setPrefWidth(100);
+        filmReviewsTable.getColumns().add(releaseDateColumn);
 
         filmReviewsTable.setItems(reviews);
     }
 
-    private void createWishlistTable(ObservableList<Wishlist> wishlistRows) {
-
+    private void createWishlistTable() {
+        wishlistTableView.getColumns().clear();
 
         TableColumn<Wishlist, Boolean> actionColumn = new TableColumn<>("Assign");
 
@@ -163,21 +192,30 @@ public class FilmDetailController {
                                             setText(null);
                                         } else {
                                             Wishlist wishlist = getTableView().getItems().get(getIndex());
-                                            String btnText = wishlist.containsFilm(selectedFilm) ? "☐":"☑";
+                                            String btnText = !wishlist.containsFilm(selectedFilm) ? "☐":"☑";
                                             btn.setText(btnText);
 
                                             btn.setOnAction(event -> {
-                                                Boolean isFilmInWishlist=wishlist.containsFilm(selectedFilm);
-                                                if(isFilmInWishlist){
+
+                                                if(wishlist.containsFilm(selectedFilm)){
                                                     wishlist.getFilms().remove(selectedFilm);
                                                 }
                                                 else{
                                                     wishlist.getFilms().add(selectedFilm);
                                                 }
-                                                wishlistDao.update(wishlist);
-                                                // ! perché è stato effettuato un toggle
-                                                String updateText = !isFilmInWishlist ? "☐":"☑";
+
+
+                                                Result<Wishlist> result= wishlistDao.update(wishlist);
+                                                if(result.isFailed()) {
+                                                    return;
+                                                }
+                                                addToWishlistActionDao.SyncFilmInWishlist(wishlist,selectedFilm);
+
+                                                String updateText = !wishlist.containsFilm(selectedFilm) ? "☐":"☑";
                                                 btn.setText(updateText);
+
+                                                setupWishlistTable();
+                                                createWishlistTable();
                                             });
                                             setGraphic(btn);
                                             setText(null);
@@ -205,6 +243,5 @@ public class FilmDetailController {
         });
         numFilmsColumn.setPrefWidth(72);
         wishlistTableView.getColumns().add(numFilmsColumn);
-        wishlistTableView.setItems(wishlistRows);
     }
 }

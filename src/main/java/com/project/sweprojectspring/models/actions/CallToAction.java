@@ -10,6 +10,7 @@ import lombok.ToString;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name="CallToAction")
@@ -29,4 +30,16 @@ public abstract class CallToAction implements Serializable {
     private SubscribedUser subscribedUser;
 
     public abstract int getInteractionValue();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CallToAction that)) return false;
+        return Objects.equals(film, that.film) && Objects.equals(subscribedUser, that.subscribedUser);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(film, subscribedUser);
+    }
 }

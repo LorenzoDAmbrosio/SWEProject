@@ -9,6 +9,7 @@ import com.project.sweprojectspring.controllers.authentication.LoginPageControll
 import com.project.sweprojectspring.controllers.authentication.LogoutPageController;
 import com.project.sweprojectspring.daos.FilmDao;
 import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
 import com.project.sweprojectspring.daos.resources.ReviewDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.services.AuthHandler;
@@ -54,6 +55,12 @@ public class SweProjectSpringApplication {
     public ReviewDao reviewDao() {
         return new ReviewDao();
     }
+    @Bean
+    public AddToWishlistActionDao addToWishlistActionDao() {
+        return new AddToWishlistActionDao();
+    }
+
+
     //endregion
 
     @Bean

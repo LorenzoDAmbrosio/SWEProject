@@ -26,12 +26,11 @@ public class Film implements Serializable  {
     private String author;
     private int releaseDate;
 
-    @OneToMany(mappedBy="film")
+    @OneToMany(mappedBy="film", fetch = FetchType.EAGER)
     private Set<Review> reviews=new HashSet<>();
 
     @OneToMany(mappedBy="film")
     private Set<CallToAction> callToActions=new HashSet<>();
-
 
     public Film(long id, String title,int releaseDate){
         this.id=id;

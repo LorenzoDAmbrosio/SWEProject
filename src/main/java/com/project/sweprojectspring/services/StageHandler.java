@@ -34,6 +34,9 @@ public class StageHandler {
     @Value("classpath:/main/wishlists/wishlist-form.fxml")
     public Resource wishlistFormResource;
 
+    @Value("classpath:/main/reviews/review-form.fxml")
+    public Resource reviewFormResource;
+
     @Value("classpath:/main/authentication/registration-page.fxml")
     public Resource registestrationPageResource;
 

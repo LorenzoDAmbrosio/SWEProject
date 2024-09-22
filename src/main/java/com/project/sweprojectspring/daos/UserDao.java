@@ -75,8 +75,8 @@ UserDao extends DAO<User>{
             if (userToDeleteResult.isFailed()) {
                 return Result.fail("User not found");
             }
-            entityManager.remove(userToDeleteResult.ToValue());
-            return Result.success(userToDeleteResult.ToValue());
+            entityManager.remove(userToDeleteResult.toValue());
+            return Result.success(userToDeleteResult.toValue());
         } catch (Exception e) {
             return Result.fail(e);
         }
