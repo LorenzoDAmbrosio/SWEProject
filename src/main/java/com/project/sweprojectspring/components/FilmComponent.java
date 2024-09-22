@@ -1,7 +1,11 @@
 package com.project.sweprojectspring.components;
 
 import com.project.sweprojectspring.controllers.FilmDetailController;
+import com.project.sweprojectspring.daos.actions.ViewInDetailActionDao;
+import com.project.sweprojectspring.models.actions.ViewInDetailAction;
+import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.resources.Film;
+import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +27,11 @@ public class FilmComponent extends Pane {
 
     @Autowired
     private StageHandler stageHandler;
+    @Autowired
+    private AuthHandler authHandler;
+
+    @Autowired
+    private ViewInDetailActionDao viewInDetailActionDao ;
 
 
     @Setter
@@ -48,8 +57,13 @@ public class FilmComponent extends Pane {
                 stageHandler.filmDetailResource,
                 (FilmDetailController controller)->{
                     controller.selectedFilm=film;
+
                     return controller;
                 });
+                ViewInDetailAction action=new ViewInDetailAction();
+                action.setFilm(film);
+                action.setSubscribedUser((SubscribedUser) authHandler.getLoggedUser());
+                viewInDetailActionDao.create(action);
             }
         });
     }

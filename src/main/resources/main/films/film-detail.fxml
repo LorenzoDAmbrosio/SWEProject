@@ -65,7 +65,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Label fx:id="filmTitle1" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="187.0" text="100 likes" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                  <Label fx:id="filmLikeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="187.0" text="100 likes" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="15.0" />
                      </font>
