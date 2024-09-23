@@ -1,5 +1,6 @@
 package com.project.sweprojectspring.controllers.settings;
 
+import com.project.sweprojectspring.controllers.ReviewFormController;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.event.ActionEvent;
@@ -51,6 +52,8 @@ public class ProfiloController {
 
     @FXML
     private void initialize() {
+        visibilityRew();
+        visibilityAdminStuff();
         //top bar
         ImpostazioniButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -86,8 +89,8 @@ public class ProfiloController {
         myreviewButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                stageHandler.SwitchStageFromEvent(event,stageHandler.myreviewPageResource);
-            }
+                stageHandler.SwitchStageFromEvent(event,stageHandler.reviewFormResource,
+                        (ReviewFormController c) ->{c.setSelectedFilm(null);return c;});}
         });
 
 //        qButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -98,10 +101,6 @@ public class ProfiloController {
 //        });
 
 //----------------------------------------------------------------------------------------------------------------------
-        //central bar
 
-       visibilityRew();
-
-        visibilityAdminStuff();
     }
 }

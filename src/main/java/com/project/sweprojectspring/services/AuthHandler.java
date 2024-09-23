@@ -108,11 +108,12 @@ public class AuthHandler {
 
         return Result.success(true);
     }
-    public Result<Boolean> RegisterPremiumSubscription(){
-        PremiumSub pb = new PremiumSub();
-        Date subscriptionStart= new Date();
 
-        Time subscriptionDuration = new Time(200000*1000);
+    public Result<Boolean> RegisterPremiumSubscription() {
+        PremiumSub pb = new PremiumSub();
+        Date subscriptionStart = new Date();
+
+        Time subscriptionDuration = new Time(200000 * 1000);
 
         pb.setSubscriptionDuration(subscriptionDuration);
         pb.setSubscriptionStart(subscriptionStart);
@@ -126,7 +127,7 @@ public class AuthHandler {
 
 
     @Transactional
-    public boolean DiventaRew(){
+    public void DiventaRew(){
         User subUser = getLoggedUser();
         Reviewer newReviewer = new Reviewer();
         long rewid = subUser.getId();
@@ -138,10 +139,9 @@ public class AuthHandler {
         if(foundUserResult.isSuccessful()){
             loggedUser=foundUserResult.toValue();
         }
-        return true;
     }
     @Transactional
-    public boolean AssociaUserSubscription(long subid){
+    public Result<User> AssociaUserSubscription(long subid){
         User subUser = getLoggedUser();
         long usid = subUser.getId();
 
@@ -150,11 +150,10 @@ public class AuthHandler {
         User filter = new User(subUser.getId());
 
         Result<User> foundUserResult=userDao.retrieveOne(filter);
-
         if(foundUserResult.isSuccessful()){
             loggedUser=foundUserResult.toValue();
         }
-        return true;
+        return foundUserResult;
     }
 
     public Result<User> Change(String username, String password, String newpassword){

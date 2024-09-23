@@ -235,7 +235,7 @@ public class ReviewFormController {
         Result<List<Review>> reviewResult= reviewDao.retrieveAll();
         ObservableList<Review> reviewRows = FXCollections.observableArrayList();
         List<Review> reviews=reviewResult.toValue();
-        reviews.removeIf(review -> {
+        reviews.removeIf(review -> { //scorre sulla lista e le rimuove SE
             if(!authHandler.IsUserLogged()) return true;
             if(!review.getReviewer().equals((Reviewer) authHandler.getLoggedUser())){
                return true;

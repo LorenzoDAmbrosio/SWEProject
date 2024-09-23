@@ -19,10 +19,11 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class LoginPageController {
-    @Autowired
+    @Autowired //dependancy injection
     private StageHandler stageHandler;
     @Autowired
     private AuthHandler authHandler;
+
 
     @FXML private Button loginButton;
     @FXML private Button registratiButton;
