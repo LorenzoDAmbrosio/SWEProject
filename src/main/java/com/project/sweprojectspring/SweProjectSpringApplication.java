@@ -9,6 +9,9 @@ import com.project.sweprojectspring.controllers.authentication.LoginPageControll
 import com.project.sweprojectspring.controllers.authentication.LogoutPageController;
 import com.project.sweprojectspring.daos.FilmDao;
 import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.actions.AddRatingActionDao;
+import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
+import com.project.sweprojectspring.daos.actions.ViewInDetailActionDao;
 import com.project.sweprojectspring.daos.authentications.ReviewerDao;
 import com.project.sweprojectspring.daos.authentications.SubscribedUserDao;
 import com.project.sweprojectspring.daos.billings.PremiumSubDao;
@@ -59,6 +62,18 @@ public class SweProjectSpringApplication {
     @Bean
     public ReviewDao reviewDao() {
         return new ReviewDao();
+    }
+    @Bean
+    public ViewInDetailActionDao ViewInDetailActionDao() {
+        return new ViewInDetailActionDao();
+    }
+    @Bean
+    public AddToWishlistActionDao AddToWishlistActionDao() {
+        return new AddToWishlistActionDao();
+    }
+    @Bean
+    public AddRatingActionDao AddRatingActionDao() {
+        return new AddRatingActionDao();
     }
     @Bean
     public SubscribedUserDao subscribedUserDao(){return new SubscribedUserDao();}

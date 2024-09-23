@@ -1,10 +1,13 @@
 package com.project.sweprojectspring.controllers;
 
 import com.project.sweprojectspring.base.Result;
+import com.project.sweprojectspring.daos.actions.AddRatingActionDao;
 import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.daos.resources.ReviewDao;
+import com.project.sweprojectspring.models.actions.AddRatingAction;
 import com.project.sweprojectspring.models.actions.AddToWishlistAction;
+import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Review;
 import com.project.sweprojectspring.models.resources.Wishlist;
@@ -41,6 +44,7 @@ public class FilmDetailController {
     @FXML private Label filmAuthor;
     @FXML private Label filmYear;
     @FXML private Label filmDescription;
+    @FXML private Label filmLikeLabel;
 
     @FXML private Button exitButton;
     @FXML private Button likeButton;
@@ -60,6 +64,8 @@ public class FilmDetailController {
     @Autowired
     private AddToWishlistActionDao addToWishlistActionDao;
     @Autowired
+    private AddRatingActionDao addRatingActionDao;
+    @Autowired
     private AuthHandler authHandler;
 
 
@@ -78,6 +84,8 @@ public class FilmDetailController {
 
         setupWishlistTable();
         createWishlistTable();
+
+        setupLikeLabel();
 
         Result<List<Review>> reviewsResult= reviewDao.retrieveAll();
         ObservableList<Review> reviewsRows = FXCollections.observableArrayList();
@@ -99,6 +107,16 @@ public class FilmDetailController {
                 Font likeButtonFont=new Font(textSize);
                 likeButton.setFont(likeButtonFont);
                 likeButton.setText(likeIcon);
+
+                AddRatingAction action=new AddRatingAction();
+                action.setFilm(selectedFilm);
+                action.setSubscribedUser((SubscribedUser) authHandler.getLoggedUser());
+                if(addRatingActionDao.any(action))
+                    addRatingActionDao.delete(action);
+                else
+                    addRatingActionDao.create(action);
+
+                setupLikeLabel();
             }
         });
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -124,6 +142,26 @@ public class FilmDetailController {
                 });
             }
         });
+    }
+
+    private void setupLikeLabel() {
+        AddRatingAction filter=new AddRatingAction();
+        filter.setFilm(selectedFilm);
+        Long result= addRatingActionDao.count(filter);
+
+        filmLikeLabel.setText(result+" Likes");
+
+
+        AddRatingAction action=new AddRatingAction();
+        action.setFilm(selectedFilm);
+        action.setSubscribedUser((SubscribedUser) authHandler.getLoggedUser());
+
+        IsFilmLiked = addRatingActionDao.any(action);
+        String likeIcon= IsFilmLiked ? "♥" :"♡";
+        int textSize= IsFilmLiked ? 30 : 24;
+        Font likeButtonFont=new Font(textSize);
+        likeButton.setFont(likeButtonFont);
+        likeButton.setText(likeIcon);
     }
 
     private void setupWishlistTable() {
