@@ -34,6 +34,11 @@ public class ProfiloController {
     @FXML
     private Button qButton;
 
+
+    //admin buttons
+    @FXML
+    private Button GestiscoButton;
+
     @FXML
     private void visibilityRew(){
         if (authHandler.IsUserReviewer()){
@@ -101,6 +106,12 @@ public class ProfiloController {
 //        });
 
 //----------------------------------------------------------------------------------------------------------------------
-
+//     Admin interactions
+        GestiscoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stageHandler.SwitchStageFromEvent(event,stageHandler.gestisciFilmResource);
+            }
+        });
     }
 }

@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #160020;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sweprojectspring.controllers.settings.BillingsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #160020;" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sweprojectspring.controllers.settings.BillingsController">
     <ToolBar layoutX="1.0" prefHeight="31.0" prefWidth="800.0" style="-fx-background-color: #2A003C; -fx-spacing: 30;">
         <items>
             <Button fx:id="MainButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="186.0" style="-fx-background-color: #2A003C;" text="VelvetView" textFill="WHITE">

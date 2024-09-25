@@ -1,6 +1,7 @@
 package com.project.sweprojectspring.services;
 
 import com.project.sweprojectspring.base.Result;
+import com.project.sweprojectspring.daos.FilmDao;
 import com.project.sweprojectspring.daos.UserDao;
 import com.project.sweprojectspring.daos.authentications.ReviewerDao;
 import com.project.sweprojectspring.daos.authentications.SubscribedUserDao;
@@ -12,6 +13,7 @@ import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.authentications.User;
 import com.project.sweprojectspring.models.billings.PremiumSub;
 import com.project.sweprojectspring.models.billings.StandardSub;
+import com.project.sweprojectspring.models.resources.Film;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class AuthHandler {
     private StandardSubDao standardSubDao;
     @Autowired
     private PremiumSubDao premiumSubDao;
+    @Autowired
+    private FilmDao filmDao;
 
 
     public  AuthHandler(UserDao userDao, ReviewerDao reviewerDao, SubscribedUserDao subscribedUserDao){
@@ -92,6 +96,21 @@ public class AuthHandler {
         }
         newUser.setPassword(password);
         return userDao.create(newUser);
+    }
+    public Result<Film> RegisterFilm(String title, String au, String description, int date){
+        Film fl = new Film();
+        if (title == null || title.trim().isEmpty()){
+            return Result.fail("è richiesto un username");
+        }
+        if(au == null || au.trim().isEmpty()){
+            return Result.fail("è richiesta una password");
+        }
+        fl.setAuthor(au);
+        fl.setDescription(description);
+        fl.setTitle(title);
+        fl.setReleaseDate(date);
+
+       return filmDao.create(fl);
     }
 
     public Result<Boolean> RegisterStandardSubscription(){

@@ -43,7 +43,7 @@
                    <children>
                          <HBox prefHeight="77.0" prefWidth="300.0">
                              <children>
-                                 <Label contentDisplay="CENTER" prefHeight="72.0" prefWidth="247.0" text="Autore" textFill="WHITE" />
+                                 <Label contentDisplay="CENTER" prefHeight="72.0" prefWidth="247.0" text="Anno" textFill="WHITE" />
                                  <Label fx:id="filmYear" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="72.0" prefWidth="247.0" text="Anno" textAlignment="RIGHT" textFill="WHITE" />
                              </children>
                          </HBox>

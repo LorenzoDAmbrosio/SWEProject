@@ -6,7 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #160020;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.sweprojectspring.controllers.MainMenuController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #160020;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.project.sweprojectspring.controllers.MainMenuController">
    <children>
       <ToolBar layoutX="1.0" prefHeight="45.0" prefWidth="800.0" style="-fx-background-color: #2A003C; -fx-spacing: 30;">
         <items>
@@ -16,14 +18,16 @@
                </font>
             </Label>
             <Separator prefHeight="43.0" prefWidth="364.0" visible="false" />
-            <Button fx:id="ProfiloButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #2A003C;" text="Profilo" textFill="WHITE">
+            <Button fx:id="ProfiloButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="81.0"
+                    style="-fx-background-color: #2A003C;" text="Profilo" textFill="WHITE">
                 <opaqueInsets>
                     <Insets left="20.0" />
                 </opaqueInsets>
                 <font>
                     <Font size="15.0" />
                 </font></Button>
-            <Button fx:id="logOutButton" layoutX="181.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" style="-fx-background-color: #2A003C;" text="Esci" textFill="WHITE">
+            <Button fx:id="logOutButton" layoutX="181.0" layoutY="16.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0"
+                    style="-fx-background-color: #2A003C;" text="Esci" textFill="WHITE">
                <opaqueInsets>
                   <Insets left="20.0" />
                </opaqueInsets>

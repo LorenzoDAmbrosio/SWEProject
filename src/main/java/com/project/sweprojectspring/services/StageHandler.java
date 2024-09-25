@@ -20,7 +20,6 @@ import java.util.function.Function;
 @Configurable
 public class StageHandler {
 
-
     @Value("classpath:/main/authentication/login-page.fxml")
     public Resource loginPageResource;
     @Value("classpath:/main/main-menu.fxml")
@@ -33,27 +32,27 @@ public class StageHandler {
     public Resource filmResource;
     @Value("classpath:/main/wishlists/wishlist-form.fxml")
     public Resource wishlistFormResource;
-
     @Value("classpath:/main/reviews/review-form.fxml")
     public Resource reviewFormResource;
-
     @Value("classpath:/main/authentication/registration-page.fxml")
     public Resource registestrationPageResource;
-
     @Value("classpath:/main/settings/profilo.fxml")
     public Resource profiloPageResource;
-
     @Value("classpath:/main/settings/billings.fxml")
     public Resource billingsResource;
 
+
     @Value("classpath:/main/settings/cambiopassword.fxml")
     public Resource cambiopasswordPageResource;
-
     @Value("classpath:/main/settings/whishlist-page.fxml")
     public Resource whishlistPageResource;
-
     @Value("classpath:/main/settings/myreview.fxml")
     public Resource myreviewPageResource;
+
+    @Value("classpath:/main/settings/adminsettings/gestiscifilm.fxml")
+    public Resource gestisciFilmResource;
+    @Value("classpath:/main/settings/adminsettings/newfilm.fxml")
+    public Resource newFilmResource;
 
 
     @Autowired

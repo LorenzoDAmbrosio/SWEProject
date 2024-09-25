@@ -49,13 +49,13 @@ public class BillingsController {
     private void visibilityRew(){
         if (authHandler.IsUserReviewer()){
             RewButton.setVisible(false);
-            Rewalable.setVisible(true);
             Rewlable.setVisible(false);
+            Rewalable.setVisible(true);
             goreviewButton.setVisible(true);
         }else {
             RewButton.setVisible(true);
-            Rewalable.setVisible(false);
             Rewlable.setVisible(true);
+            Rewalable.setVisible(false);
             goreviewButton.setVisible(false);
         }
     }
@@ -99,14 +99,5 @@ public class BillingsController {
 //            }
 //        });
 
-
-
-
-
-
-
     }
-
-
-
 }
