@@ -1,26 +1,17 @@
 package com.project.sweprojectspring.controllers.settings.adminsettings;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.models.authentications.User;
 import com.project.sweprojectspring.models.resources.Film;
-import com.project.sweprojectspring.models.resources.Review;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import lombok.Getter;
-import lombok.Setter;
 import com.project.sweprojectspring.daos.FilmDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,8 +40,8 @@ public class GestisciFilmController {
 
     @FXML
     private void initialize(){
-//        createFilmTable();
-//        setupFilmTable();
+        createFilmTable();
+        setupFilmTable();
 
         MainButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

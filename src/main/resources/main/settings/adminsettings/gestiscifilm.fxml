@@ -31,5 +31,5 @@
             <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
         </padding>
     </ToolBar>
-   <TableView fx:id="filmReviewsTable" layoutY="74.0" prefHeight="326.0" prefWidth="808.0" />
+   <TableView fx:id="filmTableView" layoutY="74.0" prefHeight="326.0" prefWidth="808.0" />
 </AnchorPane>
