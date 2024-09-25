@@ -53,6 +53,8 @@ public class StageHandler {
     public Resource gestisciFilmResource;
     @Value("classpath:/main/settings/adminsettings/newfilm.fxml")
     public Resource newFilmResource;
+    @Value("classpath:/main/settings/adminsettings/gestisciutenti.fxml")
+    public Resource gestisciUserResource;
 
 
     @Autowired

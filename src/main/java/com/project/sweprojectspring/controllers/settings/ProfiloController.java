@@ -38,6 +38,8 @@ public class ProfiloController {
     //admin buttons
     @FXML
     private Button GestiscoButton;
+    @FXML
+    private Button AdministrationButton;
 
     @FXML
     private void visibilityRew(){
@@ -111,6 +113,12 @@ public class ProfiloController {
             @Override
             public void handle(ActionEvent event) {
                 stageHandler.SwitchStageFromEvent(event,stageHandler.gestisciFilmResource);
+            }
+        });
+        AdministrationButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stageHandler.SwitchStageFromEvent(event,stageHandler.gestisciUserResource);
             }
         });
     }

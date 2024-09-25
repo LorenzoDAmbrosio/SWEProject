@@ -61,7 +61,7 @@
                         <children>
                            <Button fx:id="GestiscoButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="512.0" style="-fx-background-color: #2A003C;" text="Gestisci Film" textFill="WHITE" />
                            <Button fx:id="ReportButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="512.0" style="-fx-background-color: #2A003C;" text="Report" textFill="WHITE" />
-                           <Button fx:id="AdministratuonButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="518.0" style="-fx-background-color: #2A003C;" text="Administration" textFill="WHITE" />
+                           <Button fx:id="AdministrationButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="518.0" style="-fx-background-color: #2A003C;" text="Administration" textFill="WHITE" />
                         </children>
                      </VBox>
                   </children>

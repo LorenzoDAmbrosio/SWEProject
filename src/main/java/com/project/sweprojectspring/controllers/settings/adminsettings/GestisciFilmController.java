@@ -84,23 +84,35 @@ public class GestisciFilmController {
     private void createFilmTable() {
         filmTableView.getColumns().clear();
 
+        // Create the "Id" column
+        TableColumn<Film, Integer> idColumn = new TableColumn<>("Id");
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idColumn.setPrefWidth(50);
+        filmTableView.getColumns().add(idColumn);
+
         // Create the "Nome" column
         TableColumn<Film, String> nameColumn = new TableColumn<>("Titolo");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         nameColumn.setPrefWidth(130);
         filmTableView.getColumns().add(nameColumn);
 
-        // Create the "Descrizione" column
+        // Create the "Autore" column
         TableColumn<Film, String> descriptionColumn = new TableColumn<>("Author");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        descriptionColumn.setPrefWidth(150);
+        descriptionColumn.setPrefWidth(130);
         filmTableView.getColumns().add(descriptionColumn);
 
-        // Create the "Descrizione" column
+        // Create the "Data" column
         TableColumn<Film, Integer> dateColumn= new TableColumn<>("Anno");
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("releaseDate"));
         dateColumn.setPrefWidth(110);
         filmTableView.getColumns().add(dateColumn);
+
+        // Create the "Descrizione" column
+        TableColumn<Film, String> descColumn= new TableColumn<>("Descrizione");
+        descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descColumn.setPrefWidth(400);
+        filmTableView.getColumns().add(descColumn);
     }
 
 
