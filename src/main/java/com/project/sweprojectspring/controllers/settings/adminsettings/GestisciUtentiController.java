@@ -91,30 +91,12 @@ public class GestisciUtentiController {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         idColumn.setPrefWidth(50);
         UserTableView.getColumns().add(idColumn);
-
-//        // Create the "Nome" column
-//        TableColumn<SubscribedUser, String> nameColumn = new TableColumn<>("Titolo");
-//        nameColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-//        nameColumn.setPrefWidth(130);
-//        UserTableView.getColumns().add(nameColumn);
-//
-//        // Create the "Autore" column
-//        TableColumn<SubscribedUser, String> descriptionColumn = new TableColumn<>("Author");
-//        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-//        descriptionColumn.setPrefWidth(130);
-//        UserTableView.getColumns().add(descriptionColumn);
-
-        // Create the "Data" column
+// Create the "Data" column
         TableColumn<User, String> usernameColumn= new TableColumn<>("Username");
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         usernameColumn.setPrefWidth(110);
         UserTableView.getColumns().add(usernameColumn);
-
-//        // Create the "Descrizione" column
-//        TableColumn<SubscribedUser, String> descColumn= new TableColumn<>("Descrizione");
-//        descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-//        descColumn.setPrefWidth(400);
-//        UserTableView.getColumns().add(descColumn);
+//
     }
 
 
