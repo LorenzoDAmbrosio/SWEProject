@@ -74,13 +74,13 @@ public class RegistrationPageController {
                 registrationOutputLable.textFillProperty().setValue(new Color(0,1,0,1));
                 registrationOutputLable.setText("Ti sei registrato");
 
+                if(standardRadioButton.isSelected()) {
+                    authHandler.RegisterStandardSubscription();
+                } else {
+                    authHandler.RegisterPremiumSubscription();
+                }
                 authHandler.Login(username,password);
 
-
-                authHandler.Login(username,password);
-
-                if(standardRadioButton.isSelected()) {authHandler.RegisterStandardSubscription();
-                } else {authHandler.RegisterPremiumSubscription();}
 
                 stageHandler.SwitchStageFromEvent(event,stageHandler.mainMenuResource );
             }

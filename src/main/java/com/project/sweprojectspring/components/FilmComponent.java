@@ -51,19 +51,18 @@ public class FilmComponent extends Pane {
         detailButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                ViewInDetailAction action=new ViewInDetailAction();
+                action.setFilm(film);
+                action.setSubscribedUser((SubscribedUser) authHandler.getLoggedUser());
+                viewInDetailActionDao.create(action);
 
                 stageHandler.SwitchStageFromEvent(
                 event,
                 stageHandler.filmDetailResource,
                 (FilmDetailController controller)->{
                     controller.selectedFilm=film;
-
                     return controller;
                 });
-                ViewInDetailAction action=new ViewInDetailAction();
-                action.setFilm(film);
-                action.setSubscribedUser((SubscribedUser) authHandler.getLoggedUser());
-                viewInDetailActionDao.create(action);
             }
         });
     }

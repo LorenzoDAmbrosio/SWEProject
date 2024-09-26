@@ -20,7 +20,7 @@ import java.util.Set;
 public class Reviewer extends SubscribedUser implements Serializable  {
 
 
-    @OneToMany(mappedBy="reviewer",fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.MERGE},mappedBy="reviewer",fetch = FetchType.EAGER)
     private Set<Review> Reviews=new HashSet<>();
 
     public Reviewer(String Username, String password){

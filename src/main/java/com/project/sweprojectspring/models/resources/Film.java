@@ -26,10 +26,10 @@ public class Film implements Serializable  {
     private String author;
     private int releaseDate;
 
-    @OneToMany(mappedBy="film", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.MERGE},mappedBy="film", fetch = FetchType.EAGER)
     private Set<Review> reviews=new HashSet<>();
 
-    @OneToMany(mappedBy="film")
+    @OneToMany(cascade = {CascadeType.MERGE}, mappedBy="film")
     private Set<CallToAction> callToActions=new HashSet<>();
 
     public Film(long id, String title,int releaseDate){
@@ -59,4 +59,6 @@ public class Film implements Serializable  {
         if(wishlist.getFilms().isEmpty()) return  false;
         return wishlist.getFilms().contains(this);
     }
+
+
 }

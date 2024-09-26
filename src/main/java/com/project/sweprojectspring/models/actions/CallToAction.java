@@ -22,10 +22,10 @@ public abstract class CallToAction implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name="film_id", nullable=false)
     private Film film;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name="subscribedUser_id", nullable=false)
     private SubscribedUser subscribedUser;
 

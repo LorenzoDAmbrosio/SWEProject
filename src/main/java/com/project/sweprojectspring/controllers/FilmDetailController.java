@@ -6,7 +6,6 @@ import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.daos.resources.ReviewDao;
 import com.project.sweprojectspring.models.actions.AddRatingAction;
-import com.project.sweprojectspring.models.actions.AddToWishlistAction;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Review;
@@ -97,6 +96,7 @@ public class FilmDetailController {
             reviewsRows.addAll(reviews);
         }
         createReviewsTable(reviewsRows);
+
 
         likeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
