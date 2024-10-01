@@ -13,6 +13,7 @@ import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.authentications.User;
 import com.project.sweprojectspring.models.billings.PremiumSub;
 import com.project.sweprojectspring.models.billings.StandardSub;
+import com.project.sweprojectspring.models.billings.Subscription;
 import com.project.sweprojectspring.models.resources.Film;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -219,6 +220,15 @@ public class AuthHandler {
         return loggedUser instanceof Reviewer;
     }
 
+    public Result<Subscription> getCurrentSubscription(){
+        if(!IsUserSubscribed())
+            return Result.fail("L'Utente loggato non è autorizzato");
+        SubscribedUser user= (SubscribedUser) getLoggedUser();
+        Subscription subscription=user.getSubscription();
+        if(subscription == null)
+            return  Result.fail("L'Utente loggato è privo di iscrizione");
+        return Result.success(subscription);
+    }
 
     public boolean Logout(){
         loggedUser=null;

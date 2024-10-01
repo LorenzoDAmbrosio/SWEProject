@@ -32,7 +32,7 @@ public class Reviewer extends SubscribedUser implements Serializable  {
         if (this == o) return true;
         if (!(o instanceof Reviewer reviewer)) return false;
         if (!super.equals(o)) return false;
-        return this.getId()==reviewer.getId();
+        return this.getId().equals(reviewer.getId());
     }
 
     @Override
