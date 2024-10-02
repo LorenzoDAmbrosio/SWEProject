@@ -1,7 +1,7 @@
 package com.project.sweprojectspring.controllers;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.daos.FilmDao;
+import com.project.sweprojectspring.daos.resources.FilmDao;
 import com.project.sweprojectspring.daos.resources.ReviewDao;
 import com.project.sweprojectspring.models.authentications.Reviewer;
 import com.project.sweprojectspring.models.resources.Film;

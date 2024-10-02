@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import com.project.sweprojectspring.daos.FilmDao;
+import com.project.sweprojectspring.daos.resources.FilmDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

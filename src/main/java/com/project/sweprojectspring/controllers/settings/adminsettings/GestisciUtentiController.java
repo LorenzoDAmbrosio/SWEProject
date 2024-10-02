@@ -1,11 +1,9 @@
 package com.project.sweprojectspring.controllers.settings.adminsettings;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.authentications.UserDao;
 import com.project.sweprojectspring.daos.authentications.SubscribedUserDao;
-import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.authentications.User;
-import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.collections.FXCollections;
@@ -16,7 +14,6 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import com.project.sweprojectspring.daos.FilmDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

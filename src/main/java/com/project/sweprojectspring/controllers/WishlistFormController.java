@@ -1,7 +1,7 @@
 package com.project.sweprojectspring.controllers;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.daos.FilmDao;
+import com.project.sweprojectspring.daos.resources.FilmDao;
 import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.models.actions.AddToWishlistAction;

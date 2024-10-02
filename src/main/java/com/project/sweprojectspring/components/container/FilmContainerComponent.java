@@ -2,7 +2,7 @@ package com.project.sweprojectspring.components.container;
 
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.components.FilmComponent;
-import com.project.sweprojectspring.daos.FilmDao;
+import com.project.sweprojectspring.daos.resources.FilmDao;
 import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;

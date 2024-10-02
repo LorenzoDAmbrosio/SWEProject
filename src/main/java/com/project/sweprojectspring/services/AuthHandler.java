@@ -1,8 +1,8 @@
 package com.project.sweprojectspring.services;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.daos.FilmDao;
-import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.resources.FilmDao;
+import com.project.sweprojectspring.daos.authentications.UserDao;
 import com.project.sweprojectspring.daos.authentications.ReviewerDao;
 import com.project.sweprojectspring.daos.authentications.SubscribedUserDao;
 import com.project.sweprojectspring.daos.billings.PremiumSubDao;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Time;
 import java.util.Date;
 
-@Service
+@Service //bean di servizio
 public class AuthHandler {
     @Getter
     private User loggedUser = null;

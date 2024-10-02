@@ -1,4 +1,4 @@
-package com.project.sweprojectspring.daos;
+package com.project.sweprojectspring.daos.resources;
 
 import com.project.sweprojectspring.base.DAO;
 import com.project.sweprojectspring.base.Result;
