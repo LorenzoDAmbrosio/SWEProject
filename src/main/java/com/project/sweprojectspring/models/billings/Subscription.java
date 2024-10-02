@@ -23,7 +23,7 @@ public class Subscription implements Serializable {
     private Time subscriptionDuration;
 
 
-    public int getMaximumNumberOfWishlist(){
+    public  int getMaximumNumberOfWishlist(){
         return  0;
     }
 

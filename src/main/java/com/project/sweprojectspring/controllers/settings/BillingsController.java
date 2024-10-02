@@ -1,20 +1,15 @@
 package com.project.sweprojectspring.controllers.settings;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.models.authentications.User;
+import com.project.sweprojectspring.models.billings.StandardSub;
+import com.project.sweprojectspring.models.billings.Subscription;
 import com.project.sweprojectspring.services.AuthHandler;
 import com.project.sweprojectspring.services.StageHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -23,6 +18,7 @@ public class BillingsController {
     @Autowired
     private StageHandler stageHandler;
     @Autowired
+
     private AuthHandler authHandler;
 
 
@@ -43,6 +39,10 @@ public class BillingsController {
     private Label Rewlable;
     @FXML
     private Label Rewalable;
+    @FXML
+    private Label premiumLabel;
+    @FXML
+    private Label standardLabel;
 
 
     @FXML
@@ -79,6 +79,14 @@ public class BillingsController {
             }
         });
 
+        Result<Subscription> sub=authHandler.getCurrentSubscription();
+        if(sub.isSuccessful() && sub.toValue() instanceof StandardSub){
+            standardLabel.setVisible(true);
+            premiumLabel.setVisible(false);
+        }else{
+            standardLabel.setVisible(false);
+            premiumLabel.setVisible(true);
+        }
 
         visibilityRew();
         RewButton.setOnAction(new EventHandler<ActionEvent>(){

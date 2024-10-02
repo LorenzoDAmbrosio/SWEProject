@@ -33,7 +33,7 @@ public class ReviewFormController {
     private AuthHandler authHandler;
     @Getter
     @Setter
-    private  Film SelectedFilm = null;
+    private  Film selectedFilm = null;
     @Setter
     @Getter
     public Review selectedReview;
@@ -73,8 +73,8 @@ public class ReviewFormController {
         createReviewTable();
         setupReviewTable();
 
-        if(SelectedFilm != null){
-            filmTitle.setText("Recensioni di "+SelectedFilm.getTitle());
+        if(selectedFilm != null){
+            filmTitle.setText("Recensioni di "+ selectedFilm.getTitle());
             filmTableView.setVisible(false);
         }
 
@@ -89,6 +89,7 @@ public class ReviewFormController {
             if(selectedReview == null)
                 selectedReview = newSelection;
         });
+
 
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -112,12 +113,13 @@ public class ReviewFormController {
 
         });
 
+
         reviewCreateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if(!IsReviewInCreation && !IsReviewSelected){
                     selectedReview=new Review();
-                    selectedReview.setFilm(SelectedFilm);
+                    selectedReview.setFilm(selectedFilm);
 
                     reviewCreateButton.setText("Salva");
                     reviewDescriptionTextField.setDisable(false);
@@ -128,9 +130,12 @@ public class ReviewFormController {
                     IsReviewInCreation=true;
                     return;
                 }
+
                 Review newReview=new Review();
+                Reviewer loggedUser=(Reviewer) authHandler.getLoggedUser();
+
                 newReview.setDescription(reviewDescriptionTextField.getText());
-                newReview.setReviewer((Reviewer) authHandler.getLoggedUser());
+                newReview.setReviewer(loggedUser);
                 newReview.setFilm(selectedReview.getFilm());
                 Result<Review> result= reviewDao.create(newReview);
 
@@ -157,14 +162,18 @@ public class ReviewFormController {
             public void handle(ActionEvent event) {
                 if(selectedReview == null)
                     return;
-                Review editReview= selectedReview;
+                Review editReview= new Review();
+                editReview.setId(selectedReview.getId());
                 editReview.setDescription(reviewDescriptionTextField.getText());
                 editReview.setFilm(selectedReview.getFilm());
 
                 Result<Review> result= reviewDao.update(editReview);
-
                 reviewOutputLabel.setText(result.toString());
 
+                if(result.isFailed())
+                    return;
+
+                selectedReview=result.toValue();
                 createReviewTable();
                 setupReviewTable();
                 reviewTableView.getSelectionModel().select(result.toValue());
@@ -178,9 +187,9 @@ public class ReviewFormController {
             public void handle(ActionEvent event) {
                 if(selectedReview == null)
                     return;
-                Review editReview= new Review();
-                editReview.setId(selectedReview.getId());
-                Result<Review> result= reviewDao.delete(editReview);
+                Review deleteReview= new Review();
+                deleteReview.setId(selectedReview.getId());
+                Result<Review> result= reviewDao.delete(deleteReview);
 
                 reviewOutputLabel.setText(result.toString());
 
@@ -240,7 +249,7 @@ public class ReviewFormController {
             if(!review.getReviewer().equals((Reviewer) authHandler.getLoggedUser())){
                return true;
             }
-            if(SelectedFilm != null && !review.getFilm().equals(SelectedFilm))
+            if(selectedFilm != null && !review.getFilm().equals(selectedFilm))
                 return true;
             return false;
         });
@@ -248,6 +257,17 @@ public class ReviewFormController {
             reviewRows.addAll(reviews);
         }
         reviewTableView.setItems(reviewRows);
+
+        if(reviews.stream().anyMatch(review->{
+            return review.getFilm().equals(selectedFilm)
+                    && review.getReviewer().equals(authHandler.getLoggedUser());
+        })) {
+            reviewCreateButton.setDisable(true);
+            reviewSelectButton.setDisable(false);
+        }else{
+            reviewCreateButton.setDisable(false);
+            reviewSelectButton.setDisable(true);
+        }
     }
 
     private void createReviewTable() {
@@ -282,7 +302,7 @@ public class ReviewFormController {
     }
 
     private void setupFilmTable() {
-        if(SelectedFilm != null)
+        if(selectedFilm != null)
             return;
 
         filmTableView.setItems(FXCollections.observableArrayList());
@@ -292,7 +312,7 @@ public class ReviewFormController {
         films.removeIf(film -> {
             if(!authHandler.IsUserLogged())
                 return true;
-            if(SelectedFilm != null && !film.equals(SelectedFilm))
+            if(selectedFilm != null && !film.equals(selectedFilm))
                 return true;
             return false;
         });
@@ -303,7 +323,7 @@ public class ReviewFormController {
     }
 
     private void createFilmTable() {
-        if(SelectedFilm != null)
+        if(selectedFilm != null)
             return;
         filmTableView.getColumns().clear();
         TableColumn<Film, Boolean> actionColumn = new TableColumn<>("Assign");

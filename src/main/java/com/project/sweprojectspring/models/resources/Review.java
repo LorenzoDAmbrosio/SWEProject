@@ -23,11 +23,11 @@ public class Review implements Serializable  {
     private String description;
     private Date publishDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name="film_id", nullable=false)
     private Film film;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name="reviewer_id", nullable=false)
     private Reviewer reviewer;
 
@@ -39,5 +39,12 @@ public class Review implements Serializable  {
     }
     public Review(String description){
         this.description=description;
+    }
+
+    @Override
+    public String toString() {
+        return ""
+                + publishDate
+                + " " + film.getTitle();
     }
 }

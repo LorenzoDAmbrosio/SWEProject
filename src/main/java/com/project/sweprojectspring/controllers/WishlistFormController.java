@@ -6,6 +6,8 @@ import com.project.sweprojectspring.daos.actions.AddToWishlistActionDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.models.actions.AddToWishlistAction;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
+import com.project.sweprojectspring.models.billings.PremiumSub;
+import com.project.sweprojectspring.models.billings.Subscription;
 import com.project.sweprojectspring.models.resources.Film;
 import com.project.sweprojectspring.models.resources.Wishlist;
 import com.project.sweprojectspring.services.AuthHandler;
@@ -93,6 +95,7 @@ public class WishlistFormController {
                     return;
                 if(IsWishlistSelected){
                     WishlistDeselection();
+                    setupWishlistTable();
                     IsWishlistSelected=false;
                 }else{
                     WishlistSelection();
@@ -216,12 +219,25 @@ public class WishlistFormController {
         List<Wishlist> wishlists=wishlistResult.toValue();
         wishlists.removeIf(wishlist -> {
             if(!authHandler.IsUserLogged()) return true;
-            return !wishlist.getSubscribedUser().equals(authHandler.getLoggedUser());
+            SubscribedUser wishlistOwner=wishlist.getSubscribedUser();
+            SubscribedUser loggedUser= (SubscribedUser) authHandler.getLoggedUser();
+            return !wishlistOwner.equals(loggedUser);
         });
         if(!wishlists.isEmpty()) {
             wishlistRows.addAll(wishlists);
         }
         wishlistTableView.setItems(wishlistRows);
+
+        Result<Subscription> sub=authHandler.getCurrentSubscription();
+
+        Subscription subscription=sub.toValue();
+        if(sub.isFailed()
+            || wishlists.size() >= subscription.getMaximumNumberOfWishlist() ){
+            wishlistCreateButton.setDisable(true);
+        }else{
+            wishlistCreateButton.setDisable(false);
+        }
+
     }
 
     private void createWishlistTable() {

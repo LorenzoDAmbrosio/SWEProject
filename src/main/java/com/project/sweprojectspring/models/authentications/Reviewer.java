@@ -20,7 +20,7 @@ import java.util.Set;
 public class Reviewer extends SubscribedUser implements Serializable  {
 
 
-    @OneToMany(mappedBy="reviewer",fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.MERGE},mappedBy="reviewer",fetch = FetchType.EAGER)
     private Set<Review> Reviews=new HashSet<>();
 
     public Reviewer(String Username, String password){
@@ -32,7 +32,7 @@ public class Reviewer extends SubscribedUser implements Serializable  {
         if (this == o) return true;
         if (!(o instanceof Reviewer reviewer)) return false;
         if (!super.equals(o)) return false;
-        return this.getId()==reviewer.getId();
+        return this.getId().equals(reviewer.getId());
     }
 
     @Override

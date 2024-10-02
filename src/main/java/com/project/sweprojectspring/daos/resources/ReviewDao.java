@@ -4,8 +4,10 @@ import com.project.sweprojectspring.base.DAO;
 import com.project.sweprojectspring.base.Result;
 import com.project.sweprojectspring.models.resources.Review;
 import jakarta.persistence.NoResultException;
+import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -19,11 +21,13 @@ public class ReviewDao extends DAO<Review> {
             if(review.getFilm() == null)
                 return  Result.fail("Assegnare un film");
 
-            review.setPublishDate(Date.from(ZonedDateTime.now().toInstant()));
+            Date current=Date.from(ZonedDateTime.now().toInstant());
+            review.setPublishDate(current);
 
-            entityManager.persist(review);
-            return Result.success(review);
-        } catch (DataIntegrityViolationException e) {
+            review.setId(0L);
+            Review mergeReview= entityManager.merge(review);
+            return Result.success(mergeReview);
+        } catch (IllegalStateException e) {
             return Result.fail("Review già esistente.");
         } catch (Exception e) {
             return Result.fail(e);
@@ -63,7 +67,9 @@ public class ReviewDao extends DAO<Review> {
             if(review.getFilm() == null)
                 return  Result.fail("Assegnare un film");
 
-            Result<Review> existingReviewResult = retrieveOne(review);
+            Review filter=new Review();
+            filter.setId(review.getId());
+            Result<Review> existingReviewResult = retrieveOne(filter);
             if (existingReviewResult.isFailed()) {
                 return Result.fail("Review not found");
             }
@@ -73,10 +79,9 @@ public class ReviewDao extends DAO<Review> {
             // Aggiorna i campi della review esistente con i valori della nuova review
             existingReview.setDescription(review.getDescription());
 
-            // Esegui il merge delle modifiche
-            entityManager.merge(existingReview);
 
-            return Result.success(existingReview);
+            Review mergeReview= entityManager.merge(review);
+            return Result.success(mergeReview);
         } catch (DataIntegrityViolationException e) {
             return Result.fail("Data integrity violation.");
         } catch (Exception e) {
@@ -87,7 +92,9 @@ public class ReviewDao extends DAO<Review> {
     @Override
     public Result<Review> delete(Review review) {
         try {
-            Result<Review> reviewToDeleteResult = retrieveOne(review);
+            Review filter=new Review();
+            filter.setId(review.getId());
+            Result<Review> reviewToDeleteResult = retrieveOne(filter);
             if (reviewToDeleteResult.isFailed()) {
                 return Result.fail("Review not found");
             }

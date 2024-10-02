@@ -9,7 +9,7 @@ import java.util.List;
 * */
 public interface DAOInterface<T> {
 
-    @Transactional
+    @Transactional(Transactional.TxType.REQUIRED)
     Result<T> create(T t);
     Result<List<T>> retrieveAll();
     Result<T> retrieveOne(T t);
