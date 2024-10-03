@@ -101,10 +101,10 @@ public class AuthHandler {
     public Result<Film> RegisterFilm(String title, String au, String description, int date){
         Film fl = new Film();
         if (title == null || title.trim().isEmpty()){
-            return Result.fail("è richiesto un username");
+            return Result.fail("è richiesto un titolo");
         }
         if(au == null || au.trim().isEmpty()){
-            return Result.fail("è richiesta una password");
+            return Result.fail("è richiesto un autore");
         }
         fl.setAuthor(au);
         fl.setDescription(description);
