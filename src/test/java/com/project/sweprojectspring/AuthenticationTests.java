@@ -1,8 +1,8 @@
 package com.project.sweprojectspring;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.daos.FilmDao;
-import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.resources.FilmDao;
+import com.project.sweprojectspring.daos.authentications.UserDao;
 import com.project.sweprojectspring.daos.billings.PremiumSubDao;
 import com.project.sweprojectspring.daos.billings.StandardSubDao;
 import com.project.sweprojectspring.models.authentications.User;

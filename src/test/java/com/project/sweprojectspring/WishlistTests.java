@@ -1,7 +1,7 @@
 package com.project.sweprojectspring;
 
 import com.project.sweprojectspring.base.Result;
-import com.project.sweprojectspring.daos.UserDao;
+import com.project.sweprojectspring.daos.authentications.UserDao;
 import com.project.sweprojectspring.daos.resources.WishlistDao;
 import com.project.sweprojectspring.models.authentications.SubscribedUser;
 import com.project.sweprojectspring.models.resources.Film;
