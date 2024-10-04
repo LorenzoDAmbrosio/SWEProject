@@ -14,7 +14,8 @@ public class FilmDao extends DAO<Film> {
     @Override
     public Result<Film> create(Film film) {
         try {
-            entityManager.persist(film);
+            film.setId(0L);
+            entityManager.merge(film);
             return Result.success(film);
         } catch (DataIntegrityViolationException e) {
             //return Result.fail("Film with this Filmname: "+film.getFilmname()+" already exists");

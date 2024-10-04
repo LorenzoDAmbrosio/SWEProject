@@ -43,6 +43,12 @@ public class Wishlist implements Serializable  {
         this.name=name;
     }
 
+    public Wishlist(String name, String description, SubscribedUser user) {
+        this.name=name;
+        this.description=description;
+        this.setSubscribedUser(user);
+    }
+
     public Integer getNumberOfFilms() {
         if(films.isEmpty()) return  0;
         return films.size();
