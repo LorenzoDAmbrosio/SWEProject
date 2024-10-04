@@ -8,7 +8,6 @@ public class Result<T> {
         this.value=value;
         this.error=null;
     }
-
     public Result(Exception exception){
         this.error=exception;
         this.value=null;
@@ -17,21 +16,19 @@ public class Result<T> {
         this.error=new Exception(message);
         this.value=null;
     }
-
     public boolean isFailed(){
         return value==null;
     }
-
     public boolean isSuccessful(){
         return error==null;
     }
     public T toValue(){
         return value;
     }
-
     public Exception ToError(){
         return error;
     }
+
 
     public static <Tf> Result<Tf> fail(Exception error){
         return new Result<Tf>(error);

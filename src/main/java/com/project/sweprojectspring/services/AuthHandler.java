@@ -45,9 +45,6 @@ public class AuthHandler {
         this.userDao=userDao;
     }
 
-
-
-
     public boolean IsUserLogged(){
         return loggedUser!=null;
     }
@@ -61,7 +58,6 @@ public class AuthHandler {
         if(password == null || password.trim().isEmpty()){
             return Result.fail("è richiesta una password");
         }
-
         filter.setUsername(username);
         if(!userDao.any(filter)){
             return Result.fail("Utente non trovato");
@@ -75,7 +71,6 @@ public class AuthHandler {
         if(foundUserResult.isSuccessful()){
             loggedUser=foundUserResult.toValue();
         }
-
         return foundUserResult;
     }
     public Result<User> Register(String username, String password, String repassword){
@@ -165,7 +160,6 @@ public class AuthHandler {
         User subUser = getLoggedUser();
         long usid = subUser.getId();
 
-
         subscribedUserDao.compilaSubscribed(usid,subid);
         User filter = new User(subUser.getId());
 
@@ -201,8 +195,6 @@ public class AuthHandler {
 
         user.setPassword(newpassword);
         return userDao.update(user);
-
-
     }
 
 
