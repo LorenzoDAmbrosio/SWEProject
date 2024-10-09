@@ -79,8 +79,13 @@ public class WishlistTests {
         wishlistDao.create(wishlist2);
 
         Result<List<Wishlist>> result = wishlistDao.retrieveAll();
+
+        List<Wishlist> userLists=result.toValue().stream().filter(wishlist -> {
+          return  wishlist.getSubscribedUser().equals(testUser);
+        }).toList();
+
         assertTrue(result.isSuccessful());
-        assertEquals(2, result.toValue().size());
+        assertEquals(2, userLists.size());
     }
 
     // Test per il recupero di una singola wishlist tramite filtro

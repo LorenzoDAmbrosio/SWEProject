@@ -15,7 +15,7 @@ import java.util.List;
 public class WishlistDao extends DAO<Wishlist> {
     @Override
     public Result<Wishlist> create(Wishlist wishlist) {
-        if(wishlist.getName().isEmpty())
+        if(wishlist.getName().trim().isEmpty())
             return  Result.fail("Assegnare un nome");
         try {
             entityManager.persist(wishlist);

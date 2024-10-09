@@ -50,7 +50,7 @@ public class Result<T> {
             return "OK";
         }
         else if(isFailed()){
-            return this.ToError().toString();
+            return this.ToError().getMessage();
         }
         return "Non inizializzato";
     }
