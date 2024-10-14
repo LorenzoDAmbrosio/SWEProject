@@ -176,6 +176,9 @@ public class AuthHandler {
         if(username == null || username.trim().isEmpty()){
             return Result.fail("è richiesto un username");
         }
+        if ( user == null ){
+            return Result.fail("nessun utente loggato");
+        }
         if ( !(user.getUsername().equals(username) ) ){
             return Result.fail("username non coincide con quello loggato");
         }
